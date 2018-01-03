@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = policy_scope(Group).order(created_at: :desc)
+    @groups = policy_scope(Group)
   end
 
   def new

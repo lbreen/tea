@@ -1,7 +1,19 @@
 class GroupPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.select { |group| group.is_a_user?(user) }
     end
+  end
+
+  def create?
+    return true
+  end
+
+  def update?
+    super # Need to change this
+  end
+
+  def destroy?
+    super # Need to change this
   end
 end
