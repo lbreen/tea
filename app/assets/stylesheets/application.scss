@@ -1,3 +1,4 @@
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -13,3 +14,18 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+.padded {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+a {
+  color: inherit;
+}
+  a:hover {
+    cusor: pointer;
+    color: inherit;
+    text-decoration: none;
+  }
+

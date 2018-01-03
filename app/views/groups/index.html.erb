@@ -1,0 +1,13 @@
+<div class="container padded">
+  <div class="row">
+    <% @groups.each do |group| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="group_card" style="background-color: <%= group.colour %>;">
+          <%= link_to group_path(group) do %>
+            <p><%= group.name %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
