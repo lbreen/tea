@@ -10,16 +10,24 @@ users << User.create!(email: 'w.morbey@gmail.com', first_name: 'Will', last_name
 users << User.create!(email: 'j.delaney@gmail.com', first_name: 'Joe', last_name: 'Delaney', password: '123456')
 users << User.create!(email: 'm.croall@gmail.com', first_name: 'Matt', last_name: 'Croall', password: '123456')
 
-colours = ['#ff2d2d', '#61d8f9', '#4830ff', '#00a523', '#d84cff']
+colours = ['rgb(255, 45, 45)', 'rgb(97, 216, 249)', 'rgb(72, 48, 255)', 'rgb(0, 165, 35)', 'rgb(216, 76, 255)', 'rgb(255, 255, 255)']
 
-# red = '#ff2d2d'
-# light_blue = '#61d8f9'
-# dark_blue = '#4830ff'
-# green = '#00a523'
-# purple = '#d84cff'
+# red = 'rgb(255, 45, 45)'
+# light_blue = 'rgb(97, 216, 249)'
+# dark_blue = 'rgb(72, 48, 255)'
+# green = 'rgb(0, 165, 35)'
+# purple = 'rgb(216, 76, 255)'
+# white ='rgb(255, 255, 255)'
 
-colours.each do |colour|
-	group = Group.create!(name: Faker::Beer.name, colour: colour)
+group_names = []
+
+until group_names.length == colours.length
+  name = Faker::Beer.name
+  group_names << name if name.chars.length < 26
+end
+
+colours.each_with_index do |colour, index|
+	group = Group.create!(name: group_names[index], colour: colour)
 	group.users = users
 end
 

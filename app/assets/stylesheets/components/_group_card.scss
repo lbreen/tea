@@ -4,13 +4,18 @@
   color: white;
   text-align: center;
   margin: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   &:hover {
     opacity: 0.7;
   }
 }
 
 .group-card-content {
-    padding-top: 37.5px;
+  p {
+    margin: 0px;
+  }
 }
 
 .new-group {
