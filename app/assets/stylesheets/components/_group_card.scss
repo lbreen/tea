@@ -1,11 +1,22 @@
-.group_card {
+.group-card {
   min-height: 100px;
   border-radius: 5px;
   color: white;
   text-align: center;
   margin: 5px;
-  p {
-    padding-top: 37.5px;
+  &:hover {
+    opacity: 0.7;
   }
+}
 
+.group-card-content {
+    padding-top: 37.5px;
+}
+
+.new-group {
+  border: 5px dashed #2B82CD;
+  color: black;
+  &:hover {
+    color: $gray;
+  }
 }

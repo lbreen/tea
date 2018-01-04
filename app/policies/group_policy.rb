@@ -1,7 +1,7 @@
 class GroupPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.select { |group| group.is_a_user?(user) }
+      scope.select { |group| group.is_a_member?(user) }
     end
   end
 

@@ -4,7 +4,11 @@ class Group < ApplicationRecord
 
 	validates :name, length: { maximum: 26 }
 
-  def is_a_user?(user)
+  def members
+    self.users
+  end
+
+  def is_a_member?(user)
     self.users.each { |group_user| return true if group_user == user }
     false
   end

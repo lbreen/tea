@@ -7,13 +7,24 @@
     <% else %>
       <% @groups.each do |group| %>
         <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="group_card" style="background-color: <%= group.colour %>;">
+          <div class="group-card" style="background-color: <%= group.colour %>;">
             <%= link_to group_path(group) do %>
-              <p><%= group.name %></p>
+              <div class="group-card-content">
+                <p><%= group.name %></p>
+              </div>
             <% end %>
           </div>
         </div>
       <% end %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="group-card new-group">
+          <%= link_to new_group_path do %>
+            <div class="group-card-content">
+              <p><i class="fa fa-plus-circle"></i> Create a new group</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
