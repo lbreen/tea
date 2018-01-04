@@ -1,10 +1,12 @@
 class GroupsController < ApplicationController
+
   def index
     @groups = policy_scope(Group)
   end
 
   def new
     @group = Group.new
+    authorize @group
   end
 
   def create
