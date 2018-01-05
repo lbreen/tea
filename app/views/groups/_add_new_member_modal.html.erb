@@ -8,13 +8,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for @new_group_member do |f| %>
+        <%= simple_form_for [group, group_member] do |f| %>
 
-
+        <%= f.association :member, as: :check_boxes, collection: User.select{ |u| group.is_a_member?(u) == false }, label_method: :full_name, value_method: :id %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= f.submit "Add member" %>
+        <%= f.submit "Add member", class: 'btn btn-primary' %>
 
         <% end %>
       </div>

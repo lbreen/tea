@@ -32,7 +32,7 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal">
         <i class='fa fa-plus-circle'></i> Add new member
       </button>
-      <%= render 'add_new_member_modal' %>
+      <%= render 'add_new_member_modal', group: @group, group_member: @group_member %>
     </div>
   </div>
 </div>

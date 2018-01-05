@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @new_group_member = GroupMember.new
+    @group_member = GroupMember.new
   end
 
   def new
@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.admin = current_user
-    @group.users = user_id_params.map { |id| User.find(id) } + [current_user]
+    @group.members = user_id_params.map { |id| User.find(id) } + [current_user]
 
     authorize @group
     if @group.save!
@@ -44,12 +44,12 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :colour, :user_ids)
+    params.require(:group).permit(:name, :colour, :member_ids)
   end
 
   def user_id_params
-    params[:group][:user_ids].delete('')
-    params[:group][:user_ids]
+    params[:group][:member_ids].delete('')
+    params[:group][:member_ids]
   end
 
   def colours
