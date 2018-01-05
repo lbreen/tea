@@ -3,12 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :user_groups, dependent: :destroy
-  has_many :groups, through: :user_groups
+  has_many :group_members, dependent: :destroy
+  # has_many :groups, through: :group_members
   has_many :groups
 
   def full_name
   	"#{self.first_name} #{self.last_name}"
+  end
+
+  def members
+    self.group_members.map { |member| member.group }
   end
 
   def group_admin?(group)

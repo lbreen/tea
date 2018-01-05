@@ -1,12 +1,13 @@
 class GroupsController < ApplicationController
   before_action :colours, only: [:new, :create]
-  before_action :set_group, only: [:show]
+  before_action :find_group, only: [:show, :add_member]
 
   def index
     @groups = policy_scope(Group)
   end
 
   def show
+    @new_group_member = GroupMember.new
   end
 
   def new
@@ -16,8 +17,8 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.user = current_user
-    @group.users = user_id_params.map { |id| User.find(id) }
+    @group.admin = current_user
+    @group.users = user_id_params.map { |id| User.find(id) } + [current_user]
 
     authorize @group
     if @group.save!
@@ -36,6 +37,10 @@ class GroupsController < ApplicationController
   def destroy
   end
 
+  def add_member
+
+  end
+
   private
 
   def group_params
@@ -51,7 +56,7 @@ class GroupsController < ApplicationController
     @colours = ['rgb(255, 255, 255)', 'rgb(255, 45, 45)', 'rgb(97, 216, 249)', 'rgb(72, 48, 255)', 'rgb(0, 165, 35)', 'rgb(216, 76, 255)']
   end
 
-  def set_group
+  def find_group
     @group = Group.find(params[:id])
     authorize @group
   end

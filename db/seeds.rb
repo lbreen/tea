@@ -1,6 +1,6 @@
 Group.destroy_all
 User.destroy_all
-UserGroup.destroy_all
+GroupMember.destroy_all
 
 users = []
 
@@ -27,8 +27,10 @@ until group_names.length == colours.length
 end
 
 colours.each_with_index do |colour, index|
-	group = Group.create!(name: group_names[index], colour: colour, user: users.first)
-	group.users = users[1..4]
+	group = Group.new(name: group_names[index], colour: colour)
+  group.admin = users.first
+	group.members = users
+  group.save!
 end
 
 puts "DB seeded successfully"
