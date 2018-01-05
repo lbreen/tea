@@ -1,0 +1,27 @@
+.group-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.group-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.group-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.stat-figure {
+  font-size: 40px;
+}
+
+.stat-title {
+  text-align: center
+}

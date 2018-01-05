@@ -17,6 +17,9 @@
               <div class="colour-picker-btn" style="background-color: <%= colour %>;"></div>
             <% end %>
           </div>
+
+          <%= f.association :users, as: :check_boxes, collection: User.where.not(id: current_user.id), label: "Friends:", label_method: :full_name, value_method: :id %>
+
           <%= f.button :submit, class: "btn btn-primary wide-btn " %>
         <% end %>
       </div>

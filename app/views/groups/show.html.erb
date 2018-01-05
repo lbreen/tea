@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="group-navigation">
+    <%= link_to groups_path do %>
+      <p style="padding-top: 10px;"><i class="fa fa-arrow-circle-left"></i> Back to your groups</p>
+    <% end %>
+    <%= link_to groups_path, class: "btn btn-danger" do %>
+      <p><i class="fa fa-trash"></i> Leave group</p>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="text-center"><%= @group.name %></h2>
+      <div class="group-stats">
+        <div class="group-stat">
+          <div class="stat-figure">0</div>
+          <div class="stat-title">Total drinks made</div>
+        </div>
+        <div class="group-stat">
+          <div class="stat-figure">0</div>
+          <div class="stat-title">Avg. person per round</div>
+        </div>
+        <div class="group-stat">
+          <div class="stat-figure">0</div>
+          <div class="stat-title">Avg. person per round</div>
+        </div>
+      </div>
+      <ul class="group-members">
+        <% @group.members.each do |member| %>
+          <li><%= member.full_name %><%= " - Admin" if member.group_admin?(@group) %></li>
+        <% end %>
+      </ul>
+      <%= link_to new_group_path, class: "btn btn-primary" do %>
+        <p><i class='fa fa-plus-circle'></i> Add new member</p>
+      <% end %>
+    </div>
+  </div>
+</div>
