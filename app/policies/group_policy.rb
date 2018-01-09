@@ -1,8 +1,15 @@
 class GroupPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope.select { |group| group.is_a_member?(user) }
     end
+  end
+
+  def show?
+    record.members.each do |member|
+      return true if member == user
+    end
+    false
   end
 
   def create?

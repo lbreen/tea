@@ -10,6 +10,7 @@ class GroupMemberPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.group.admin == user
+    # Only the admin or the user themselves can remove the user
+    record.group.admin == user || record.member == user
   end
 end
