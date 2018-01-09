@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
 
   def show
     @group_member = GroupMember.new
+    @members = @group.members.sort { |x, y| x.first_name <=> y.first_name }
   end
 
   def new

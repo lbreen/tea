@@ -25,3 +25,11 @@
 .stat-title {
   text-align: center
 }
+
+.group-member-btns {
+  display: flex;
+  align-items: center;
+  button {
+    margin-right: 10px;
+  }
+}

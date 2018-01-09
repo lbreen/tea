@@ -25,14 +25,16 @@
         </div>
       </div>
       <ul class="group-members">
-        <% @group.members.each do |member| %>
-          <li><%= member.full_name %><%= " - Admin" if member.group_admin?(@group) %></li>
+        <% @members.each do |member| %>
+          <li><%= link_to "Remove", group_group_member_path(@group, member), method: :delete, data: { confirm: 'Are you sure?' }%> <%= member.full_name %><%= " - Admin" if member.group_admin?(@group) %></li>
         <% end %>
       </ul>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal">
-        <i class='fa fa-plus-circle'></i> Add new member
-      </button>
-      <%= render 'add_new_member_modal', group: @group, group_member: @group_member %>
+      <div class="group-member-btns">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal">
+          <i class='fa fa-plus-circle'></i> Add new member
+        </button>
+        <%= render 'add_new_member_modal', group: @group, group_member: @group_member %>
+      </div>
     </div>
   </div>
 </div>

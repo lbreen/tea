@@ -18,6 +18,10 @@ class GroupMembersController < ApplicationController
   end
 
   def destroy
+    @group_member = GroupMember.where(group_id: params[:group_id], user_id: params[:id])[0]
+    authorize @group_member
+    @group_member.delete
+    redirect_to group_path(Group.find(params[:group_id]))
   end
 
   private

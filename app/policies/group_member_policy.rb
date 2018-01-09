@@ -8,4 +8,8 @@ class GroupMemberPolicy < ApplicationPolicy
   def create?
     record.group.admin == user
   end
+
+  def destroy?
+    record.group.admin == user
+  end
 end
