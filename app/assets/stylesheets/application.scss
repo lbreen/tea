@@ -23,9 +23,11 @@
 a {
   color: inherit;
 }
-  a:hover {
-    cusor: pointer;
-    color: inherit;
-    text-decoration: none;
-  }
-
+a:hover {
+  cusor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+p {
+  margin-bottom: 0px; // Cancel default margin from bootstrap
+}

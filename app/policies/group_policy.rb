@@ -5,15 +5,22 @@ class GroupPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    record.members.each do |member|
+      return true if member == user
+    end
+    false
+  end
+
   def create?
-    return true
+    user
   end
 
-  def update?
-    super # Need to change this
-  end
+  # def update?
+  #   super # Need to change this
+  # end
 
-  def destroy?
-    super # Need to change this
-  end
+  # def destroy?
+  #   super # Need to change this
+  # end
 end
