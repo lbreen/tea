@@ -3,7 +3,7 @@ class GroupMembersController < ApplicationController
   end
 
   def create
-    members = member_ids.map { |id| User.find(id) }
+    members = user_params.map { |id| User.find(id) }
 
     members.each do |member|
       group_member = GroupMember.new(
@@ -21,23 +21,28 @@ class GroupMembersController < ApplicationController
     @group_member = GroupMember.where(group_id: params[:group_id], user_id: params[:id])[0]
     @group = Group.find(params[:group_id])
     @user = User.find(params[:id])
-    binding.pry
+
     authorize @group_member
-    # Delete group member
+
     @group_member.delete
-    # Transfer admin rights, if admin
+
     if @user == @group.admin
+      # Transfer admin rights, if admin and redirect to group#index
       @group.admin = @group.members.first
       @group.save
       redirect_to groups_path
+    elsif @user == current_user
+      # User is removing themselves and needs to redirect to group#index
+      redirect_to groups_path
     else
+      # Member has been removed by admin
       redirect_to group_path(@group)
     end
   end
 
   private
 
-  def member_ids
+  def user_params
     params[:group_member][:user_id].delete('')
     params[:group_member][:user_id]
   end

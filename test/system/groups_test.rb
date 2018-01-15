@@ -12,6 +12,5 @@ class GroupsTest < ApplicationSystemTestCase
 
     # Should be redirected to Home with new product
     assert_equal group_index, page.current_path
-    assert_text "Change your life: Learn to code"
   end
 end

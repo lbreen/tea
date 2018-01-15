@@ -1,4 +1,6 @@
 class Group < ApplicationRecord
+  after_initialize :default_values
+
 	has_many :group_members, dependent: :destroy
   has_many :members, through: :group_members
   belongs_to :admin, class_name: "User", foreign_key: "user_id"
@@ -12,5 +14,9 @@ class Group < ApplicationRecord
   def is_a_member?(user)
     self.members.each { |member| return true if member == user }
     false
+  end
+
+  def default_values
+    self.colour = 'rgb(255, 255, 255)' if self.colour.nil?
   end
 end

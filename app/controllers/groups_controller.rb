@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
   def show
     @group_member = GroupMember.new
     @members = @group.members.sort { |x, y| x.first_name <=> y.first_name }
+    @group_statistics = group_statistics
   end
 
   def new
@@ -60,5 +61,9 @@ class GroupsController < ApplicationController
   def find_group
     @group = Group.find(params[:id])
     authorize @group
+  end
+
+  def group_statistics
+    {'Total drinks made' => 0, 'Avg. person per round' => 0, 'Hours since last brew' => 0}
   end
 end

@@ -3,39 +3,52 @@
     <%= link_to groups_path do %>
       <p style="padding-top: 10px;"><i class="fa fa-arrow-circle-left"></i> Back to your groups</p>
     <% end %>
-    <%= link_to groups_path, class: "btn btn-danger" do %>
-      <p><i class="fa fa-trash"></i> Leave group</p>
-    <% end %>
+    <%= render 'group_admin_options' %>
   </div>
   <div class="row">
     <div class="col-xs-12">
       <h2 class="text-center"><%= @group.name %></h2>
       <div class="group-stats">
-        <div class="group-stat">
-          <div class="stat-figure">0</div>
-          <div class="stat-title">Total drinks made</div>
-        </div>
-        <div class="group-stat">
-          <div class="stat-figure">0</div>
-          <div class="stat-title">Avg. person per round</div>
-        </div>
-        <div class="group-stat">
-          <div class="stat-figure">0</div>
-          <div class="stat-title">Avg. person per round</div>
-        </div>
-      </div>
-      <ul class="group-members">
-        <% @members.each do |member| %>
-          <li><%= link_to "Remove", group_group_member_path(@group, member), method: :delete, data: { confirm: 'Are you sure?' }%> <%= member.full_name %><%= " - Admin" if member.group_admin?(@group) %></li>
+        <% @group_statistics.each do |title, value| %>
+          <div class="group-stat">
+            <div class="stat-figure"><%= value %></div>
+            <div class="stat-title"><%= title %></div>
+          </div>
         <% end %>
-      </ul>
-      <div class="group-member-btns">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMemberModal">
-          <i class='fa fa-plus-circle'></i> Add new member
-        </button>
-        <%= render 'add_new_member_modal', group: @group, group_member: @group_member %>
+      </div>
+      <div class="group-members">
+        <% @members.each do |member| %>
+          <div class="group-member">
+            <% if current_user.group_admin?(@group) %>
+              <%= link_to group_group_member_path(@group, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "remove-members hidden" do %>
+                <i class="fa fa-times"></i>
+              <% end %>
+            <% end %>
+            <p><%= member.full_name %> </p>
+            <% if member.group_admin?(@group) %>
+              <p class="admin-badge"><%= "Admin" %></p>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<%= render 'add_new_member_modal', group: @group, group_member: @group_member %>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const revealBtns = (event) => {
+      document.querySelectorAll('.remove-members').forEach((member) => {
+        member.classList.toggle("hidden");
+      });
+    };
+
+    const btn = document.querySelector("#removeAMemberBtn");
+
+    btn.addEventListener("click", revealBtns);
+});
+</script>
 

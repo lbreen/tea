@@ -26,10 +26,24 @@
   text-align: center
 }
 
-.group-member-btns {
+.edit-group-btns {
   display: flex;
   align-items: center;
-  button {
+  a {
     margin-right: 10px;
   }
+}
+.group-member {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  a {
+    margin-right: 5px;
+  }
+}
+.group-dropdown {
+  cursor: pointer;
+}
+.remove-members > i {
+  color: $red;
 }
