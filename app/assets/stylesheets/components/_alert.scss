@@ -1,15 +1,30 @@
-/* -------------------------------------
- * Your CSS code for flash notices and alerts
-* ------------------------------------- */
 
 .alert {
   margin: 0;
   text-align: center;
   color: white;
+  position: fixed;
+  z-index: 100;
 }
 .alert-info {
   background: $green;
 }
 .alert-warning {
   background: $red;
+}
+
+// Extra small devices
+@media (max-width: 576px) {
+  .alert {
+    width: 100%;
+    left: 0;
+  }
+}
+
+// Small devices (mobile, 576px and up)
+@media (min-width: 576px) {
+  .alert {
+    width: 50%;
+    left: 25%;
+  }
 }

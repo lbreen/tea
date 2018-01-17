@@ -37,8 +37,9 @@
 
 /* Navbar link */
 .navbar-wagon-link {
-  color: #616668;
-  font-size: 14px;
+  // color: #616668;
+  color: white;
+  font-size: 18px;
 }
 .navbar-wagon-link:hover {
   color: #da552f;
@@ -74,4 +75,8 @@
   transform: rotate(45deg);
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+}
+.navbar-wagon-home {
+  background: transparent;
+  box-shadow: none;
 }
