@@ -1,3 +1,28 @@
 .wide-btn {
   width: 100%;
 }
+
+.homepage-btn {
+  padding: 10px 40px;
+  border-radius: 30px;
+  border: 1px solid #469ae0;
+}
+
+#sign-up-btn {
+  background-color: #469ae0;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: #469ae0;
+  }
+}
+#sign-in-btn {
+  background-color: white;
+  color: #469ae0;
+  margin-right: 8px;
+  &:hover {
+    background-color: #469ae0;
+    color: white;
+  }
+}
+

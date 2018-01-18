@@ -35,3 +35,6 @@ end
 
 gem 'faker'
 gem 'pundit'
+
+gem "sprockets"
+gem "sprockets-es6"
