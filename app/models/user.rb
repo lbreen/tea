@@ -7,6 +7,8 @@ class User < ApplicationRecord
   # has_many :groups, through: :group_members
   has_many :groups
 
+  has_many :friends
+
   def full_name
   	"#{self.first_name} #{self.last_name}"
   end
