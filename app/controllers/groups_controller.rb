@@ -8,7 +8,8 @@ class GroupsController < ApplicationController
 
   def show
     @group_member = GroupMember.new
-    @members = @group.members.sort { |x, y| x.first_name <=> y.first_name }
+    @members =  @group.members.to_a + [@group.admin]
+    @members.sort!{ |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
   end
 
@@ -20,7 +21,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.admin = current_user
-    @group.members = user_id_params.map { |id| User.find(id) } + [current_user]
+    @group.members = user_id_params.map { |id| User.find(id) }
 
     authorize @group
     if @group.save!
