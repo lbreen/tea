@@ -17,7 +17,7 @@ class GroupPolicy < ApplicationPolicy
   #   super # Need to change this
   # end
 
-  # def destroy?
-  #   super # Need to change this
-  # end
+  def destroy?
+    user.group_admin?(record)
+  end
 end

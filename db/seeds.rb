@@ -11,10 +11,10 @@ users << User.create!(email: 'w.morbey@gmail.com', first_name: 'Will', last_name
 users << User.create!(email: 'j.delaney@gmail.com', first_name: 'Joe', last_name: 'Delaney', password: '123456')
 users << User.create!(email: 'm.croall@gmail.com', first_name: 'Matt', last_name: 'Croall', password: '123456')
 
-Friendship.create!(user: admin, friend: users[0], status: "pending")
-Friendship.create!(user: admin, friend: users[1], status: "pending")
-Friendship.create!(user: admin, friend: users[2], status: "accepted")
-Friendship.create!(user: admin, friend: users[3], status: "accepted")
+Friendship.create!(user: admin, friend: users[0], status: "accepted")
+Friendship.create!(user: admin, friend: users[1], status: "accepted")
+Friendship.create!(user: admin, friend: users[2], status: "pending")
+Friendship.create!(user: admin, friend: users[3], status: "pending")
 
 colours = ['rgb(255, 45, 45)', 'rgb(97, 216, 249)', 'rgb(72, 48, 255)', 'rgb(0, 165, 35)', 'rgb(216, 76, 255)', 'rgb(255, 255, 255)']
 
@@ -35,10 +35,15 @@ end
 colours.each_with_index do |colour, index|
 	group = Group.new(name: group_names[index], colour: colour)
   group.admin = admin
-	group.members = users
+	group.members = [users[0], users[1]]
   group.save!
 end
 
+
+Friendship.create!(user: users[0], friend: users[3], status: "accepted")
+not_admin_group = Group.new(name: "Not admin", admin: users[0])
+not_admin_group.members = [admin, users[3]]
+not_admin_group.save!
 
 
 puts "DB seeded successfully"
