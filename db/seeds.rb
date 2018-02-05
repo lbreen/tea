@@ -1,5 +1,6 @@
 Group.destroy_all
 User.destroy_all
+Friendship.destroy_all
 GroupMember.destroy_all
 
 users = []
@@ -9,6 +10,11 @@ users << User.create!(email: 'a.duff@gmail.com', first_name: 'Alistair', last_na
 users << User.create!(email: 'w.morbey@gmail.com', first_name: 'Will', last_name: 'Morbey', password: '123456')
 users << User.create!(email: 'j.delaney@gmail.com', first_name: 'Joe', last_name: 'Delaney', password: '123456')
 users << User.create!(email: 'm.croall@gmail.com', first_name: 'Matt', last_name: 'Croall', password: '123456')
+
+Friendship.create!(user: users[0], friend: users[1], status: "pending")
+Friendship.create!(user: users[0], friend: users[2], status: "pending")
+Friendship.create!(user: users[0], friend: users[3], status: "accepted")
+Friendship.create!(user: users[0], friend: users[4], status: "accepted")
 
 colours = ['rgb(255, 45, 45)', 'rgb(97, 216, 249)', 'rgb(72, 48, 255)', 'rgb(0, 165, 35)', 'rgb(216, 76, 255)', 'rgb(255, 255, 255)']
 
@@ -32,6 +38,8 @@ colours.each_with_index do |colour, index|
 	group.members = users
   group.save!
 end
+
+
 
 puts "DB seeded successfully"
 
