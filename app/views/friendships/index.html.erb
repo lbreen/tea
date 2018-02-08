@@ -4,8 +4,10 @@
       <% @users.each do |user| %>
         <ul class="list-inline">
           <li><p><strong><%= user.full_name %></strong></li>
-          <% if user.friend? (current_user) %>
-            <li><%= "- Friend"%></p></li>
+          <% if user.accepted_friends.include?(current_user) %>
+            <li>- Friend</p></li>
+          <% elsif user.pending_friends.include?(current_user) %>
+            <li><p>- Request pending</p></li>
           <% else %>
             <li><%= link_to "Add friend", user_friendships_path(user), method: :post %></li>
           <% end %>

@@ -37,6 +37,8 @@
       <% @friends.each do |friend| %>
         <p><%= friend %></p>
       <% end %>
+      <br>
+      <%= link_to "Find friends", friendships_path, class: "btn btn-primary" %>
     </div>
   </div>
 </div>

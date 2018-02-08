@@ -38,14 +38,10 @@ class User < ApplicationRecord
   end
 
   def retrieve_friends(status)
-    friendships = Friendship.select{ |f| f.user == self || f.friend == self }.select { |f| f.status == status }
+    friendships = Friendship.select{ |f| f.user_id == self.id || f.friend_id == self.id }.select { |f| f.status == status }
 
-    friendships.map { |f| [f.user, f.friend] }.flatten.uniq.delete_if { |user| user == self }
-  end
+    friend_ids = friendships.map { |f| [f.user_id, f.friend_id] }.flatten.uniq.delete_if { |user_id| user_id == self.id }
 
-  def friend?(current_user)
-    # self is the user instance which is being queried
-    current_user.accepted_friends.each { |friend| return true if friend == self }
-    false
+    friend_ids.map! { |id| User.find(id) }
   end
 end
