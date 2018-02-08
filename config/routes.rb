@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+
+  devise_for :users, controllers: { sessions: 'users/sessions' }
+
+  resources :users, only: [] do
+    resources :friendships, only: [:create]
+  end
+
+  resources :friendships, only: [:index]
 
   root to: 'pages#home'
 

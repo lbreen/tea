@@ -11,6 +11,15 @@ users << User.create!(email: 'w.morbey@gmail.com', first_name: 'Will', last_name
 users << User.create!(email: 'j.delaney@gmail.com', first_name: 'Joe', last_name: 'Delaney', password: '123456')
 users << User.create!(email: 'm.croall@gmail.com', first_name: 'Matt', last_name: 'Croall', password: '123456')
 
+User.create!(email: 'k.warren@gmail.com', first_name: 'Katy', last_name: 'Warren', password: '123456')
+User.create!(email: 'k.arnold@gmail.com', first_name: 'Katie', last_name: 'Arnold', password: '123456')
+User.create!(email: 'c.uthayakumar@gmail.com', first_name: 'Cynthia', last_name: 'Uthayakumar', password: '123456')
+User.create!(email: 'r.elfassy_bitoun@gmail.com', first_name: 'Rachel', last_name: 'Elfassy-Bitoun', password: '123456')
+User.create!(email: 'v.botella@gmail.com', first_name: 'Victoria', last_name: 'Botella', password: '123456')
+User.create!(email: 'm.heller@gmail.com', first_name: 'Matt', last_name: 'Heller', password: '123456')
+User.create!(email: 's.lacey@gmail.com', first_name: 'Sam', last_name: 'Lacey', password: '123456')
+
+
 Friendship.create!(user: admin, friend: users[0], status: "accepted")
 Friendship.create!(user: admin, friend: users[1], status: "accepted")
 Friendship.create!(user: admin, friend: users[2], status: "pending")

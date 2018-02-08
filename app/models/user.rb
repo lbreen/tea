@@ -42,4 +42,10 @@ class User < ApplicationRecord
 
     friendships.map { |f| [f.user, f.friend] }.flatten.uniq.delete_if { |user| user == self }
   end
+
+  def friend?(current_user)
+    # self is the user instance which is being queried
+    current_user.accepted_friends.each { |friend| return true if friend == self }
+    false
+  end
 end
