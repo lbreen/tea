@@ -4,6 +4,8 @@ class Friendship < ApplicationRecord
 
   enum status: [:pending, :accepted, :declined, :blocked]
 
+  validates :status, presence: true
+
   before_create :user_cannot_be_own_friend
 
   def user_cannot_be_own_friend

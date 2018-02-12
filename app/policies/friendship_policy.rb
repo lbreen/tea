@@ -6,6 +6,10 @@ class FriendshipPolicy < ApplicationPolicy
   end
 
   def create?
-    user.id == record.user_id
+    user == record.user
+  end
+
+  def update?
+    user == record.friend
   end
 end

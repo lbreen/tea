@@ -7,10 +7,40 @@
   <% if user_signed_in? %>
     <!-- Right Navigation -->
     <div class="navbar-wagon-right hidden-xs hidden-sm">
+      <!-- Friend request notifications -->
+      <div class="navbar-wagon-item">
+        <div class="dropdown">
+          <i class="fa fa-users navbar-icon dropdown-toggle" data-toggle="dropdown"></i>
+          <% unless current_user.friend_requests.empty? %>
+            <p class="notification-badge" id="friend-request-notification"><%= current_user.friend_requests.count %></p>
+          <% end %>
+            <ul id="friend-request-dropdown" class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <% if current_user.friend_requests.empty? %>
+                <li><p>No new requests.</p></li>
+              <% else %>
+                <% current_user.friend_requests.each do |fr| %>
+                  <li class="flex friend-request" data-friend-request-id="<%= fr.id %>" >
+                    <%= link_to fr.user.full_name, user_profile_path(fr.user), class: "friend-request-user" %>
+                    <div class="flex" id="friend-request-response-<%= fr.id %>">
+                      <%= link_to "Accept", friendship_path(fr, status: "accepted"), method: :patch, remote: true, class: "friend-request-link" %>
+                      <%= link_to "Decline", friendship_path(fr, status: "declined"), method: :patch, remote: true, class: "friend-request-link" %>
+                    </div>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+      </div>
+      <!-- My groups -->
+      <div class="navbar-wagon-item">
+        <%= link_to groups_path, id: "navbar-my-groups", title: "My groups" do %>
+          <i class="fa fa-coffee" ></i>
+        <% end %>
+      </div>
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= user_avatar_photo(current_user, {class: "avatar dropdown-toggle", id: "navbar-wagon-menu", data_toggle: "dropdown"}) %>
+          <%= user_avatar_photo(current_user, {class: "avatar dropdown-toggle navbar-icon", id: "navbar-wagon-menu", data_toggle: "dropdown"}) %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to groups_path do %>

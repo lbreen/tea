@@ -36,3 +36,9 @@ p {
   border-top: 1px solid #eeeeee;
   margin-bottom: 15px;
 }
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

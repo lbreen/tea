@@ -44,4 +44,8 @@ class User < ApplicationRecord
 
     friend_ids.map! { |id| User.find(id) }
   end
+
+  def friend_requests
+    Friendship.select { |f| f.friend_id == self.id && f.status == "pending"}
+  end
 end
