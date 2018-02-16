@@ -1,0 +1,17 @@
+var friendRequest = document.querySelector("#friend-request-response-<%= @friendship.id %>");
+
+const status = '<%= @friendship.status.capitalize %>!';
+
+const newText = "<a href='javascript:void(0)'>" + status + "</a>";
+
+friendRequest.innerHTML = newText;
+// document.getElementById("friend-request-dropdown").innerHTML = "<li><a>No new requests.</a></li>";
+
+const notification = document.querySelector("#friend-request-notification");
+var counter = parseInt(notification.innerText);
+
+if (counter - 1 == 0) {
+  notification.remove();
+} else {
+  notification.innerText = counter - 1;
+}

@@ -1,0 +1,17 @@
+<div class="container padded ">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <ul class="list-inline">
+        <li><%= user_avatar_photo(@user, {class: "profile-avatar"}) %></li>
+        <li><h1><%= @user.full_name %></h1></li>
+        <% if current_user.accepted_friends.include?(@user) %>
+
+        <% elsif current_user.pending_friends.include?(@user) %>
+          <li>Pending friend request</li>
+        <% else %>
+          <li><%= link_to "Add friend", user_friendships_path(@user), class: "btn btn-primary", method: :post %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
