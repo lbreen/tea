@@ -35,7 +35,7 @@
       <h2>Your friends</h2>
 
       <% @friends.each do |friend| %>
-        <p><%= friend %></p>
+        <p><%= link_to friend.full_name, user_profile_path(friend) %></p>
       <% end %>
       <br>
       <%= link_to "Find friends", friendships_path, class: "btn btn-primary" %>

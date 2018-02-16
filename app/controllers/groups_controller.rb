@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 
   def index
     @groups = policy_scope(Group)
-    @friends = policy_scope(Friendship).map { |u| u.full_name }
+    @friends = policy_scope(Friendship)
   end
 
   def show
