@@ -1,0 +1,81 @@
+<div class="container padded">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="devise-form">
+        <%= simple_form_for @drink_preference do |f| %>
+          <%= f.input :milk, as: :hidden %>
+          <%= f.label "How milky do you like your tea?" %>
+          <div class="milk-picker flex">
+            <% @milk_descriptions.each_with_index do |m, index| %>
+              <div class="milk-picker-btn" id="milk-preference-<%= index %>"><%= m %></div>
+            <% end %>
+          </div>
+
+          <%= f.input :sugar, as: :hidden %>
+
+          <%= f.label "How much sugar do you like in your tea?" %>
+          <div class="sugar-picker flex">
+              <% i = 0 %>
+              <% 6.times do %>
+                <div class="sugar-cubes" id="<%= i %>">
+                  <i class="fa fa-spoon"></i>
+                  <p class="sugar-number"><%= i %></p>
+                </div>
+                <% i += 1 %>
+              <% end %>
+          </div>
+
+          <%= f.submit "Next", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", () => {
+
+    document.getElementById("0").classList.add("selected-sugar-cubes");
+    document.getElementById("milk-preference-0").classList.add("active");
+
+    const toggleSelectedSugarClass = (event, cssSelector) => {
+      // Remove any current selected classes
+      document.querySelectorAll(".sugar-cubes").forEach((btn) => {
+        btn.classList.remove("selected-sugar-cubes");
+      });
+      // Retrieve target id
+      const targetId = event.currentTarget.id;
+      // Add selected class to current sugar selection
+      event.currentTarget.classList.add("selected-sugar-cubes");
+
+      // Add selected class to preceeding items
+      document.querySelectorAll(".sugar-cubes").forEach((item) => {
+        if (item.id < targetId) {
+          item.classList.add("selected-sugar-cubes")
+        };
+      });
+
+      // Update hidden form with sugar value
+      document.querySelector("#drink_preference_sugar").value = targetId;
+    };
+
+    // Add event listner to all sugar picker buttons
+    document.querySelectorAll(".sugar-cubes").forEach((sugarCube) => {
+      sugarCube.addEventListener("click", toggleSelectedSugarClass);
+    });
+
+    const selectMilkOption = (event) => {
+      document.querySelectorAll(".milk-picker-btn").forEach((btn) => {
+        btn.classList.remove("active");
+      });
+
+      event.currentTarget.classList.add("active");
+
+      document.querySelector("#drink_preference_milk").value = event.currentTarget.innerText;
+    };
+
+    document.querySelectorAll(".milk-picker-btn").forEach((button) => {
+      button.addEventListener("click", selectMilkOption);
+    });
+});
+</script>

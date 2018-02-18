@@ -1,0 +1,63 @@
+.colour-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.colour-picker-btn {
+  height: 50px;
+  width: 50px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.colour-picker-btn:first-child {
+// First child is white so need border for this to appear on screen
+  border: 1px solid black;
+}
+
+.active {
+  border: 5px solid black !important;
+}
+
+.milk-picker-btn {
+  padding: 10px;
+  border: 1px solid black;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.sugar-cubes {
+  opacity: 0.5;
+  font-size: 32px;
+  i {
+    transform: rotate(135deg);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.sugar-picker {
+  max-width: 350px;
+}
+
+.sugar-number {
+  font-size: 24px;
+  font-weight: lighter;
+  position: relative;
+  left: 0px;
+  bottom: 10px;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.selected-sugar-cubes {
+  opacity: 1 !important;
+}

@@ -15,12 +15,14 @@ ActiveRecord::Schema.define(version: 20180216165550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "drinks", force: :cascade do |t|
-    t.string "type", default: "tea"
+  create_table "drink_preferences", force: :cascade do |t|
+    t.string "drink_type", default: "tea"
     t.integer "sugar", default: 0
     t.string "milk", default: "none"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_drink_preferences_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 20180216165550) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "drink_preferences", "users"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
   add_foreign_key "groups", "users"

@@ -2,7 +2,11 @@
   <div class="banner-content">
     <h1>Tea!</h1>
     <p>Make a brew with <span id="typed"></span></p>
-    <%= link_to "Start brewing", new_user_registration_path, class: "btn btn-primary homepage-btn" %>
+    <% if user_signed_in? %>
+      <%= link_to "Start brewing", groups_path, class: "btn btn-primary homepage-btn" %>
+    <% else %>
+      <%= link_to "Start brewing", new_user_registration_path, class: "btn btn-primary homepage-btn" %>
+    <% end %>
   </div>
 </div>
 <div class="product-explanation">

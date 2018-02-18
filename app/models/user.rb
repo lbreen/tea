@@ -6,8 +6,11 @@ class User < ApplicationRecord
   has_many :group_members, dependent: :destroy
   # has_many :groups, through: :group_members
   has_many :groups
-
+  has_many :drink_preferences, dependent: :destroy
   has_many :friendships, dependent: :destroy
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   def full_name
   	"#{self.first_name} #{self.last_name}"
