@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :drink_preferences, only: [ :new, :create ]
 
   get 'profile/:id', to: 'pages#user_profile', as: :user_profile
+  get "profile/:id/edit", to: "users#edit", as: :edit_profile
+  patch "/profile/:id", to: "users#update", as: :update_profile
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
