@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :group_members, dependent: :destroy
   # has_many :groups, through: :group_members
   has_many :groups
-
+  has_many :messages, dependent: :destroy
   has_many :friendships, dependent: :destroy
 
   def full_name

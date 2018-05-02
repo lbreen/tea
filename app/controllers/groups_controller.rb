@@ -12,6 +12,8 @@ class GroupsController < ApplicationController
     @members =  @group.members.to_a + [@group.admin]
     @members.sort!{ |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
+    @message = Message.new
+    @messages = Message.select { |message| message.group == @group }
   end
 
   def new

@@ -16,7 +16,10 @@
           </div>
         <% end %>
       </div>
+    </div>
+    <div class="col-xs-6">
       <div class="group-members">
+        <h4>Group Members</h4>
         <% @members.each do |member| %>
           <div class="group-member">
             <% if current_user.group_admin?(@group) %>
@@ -31,6 +34,12 @@
           </div>
         <% end %>
       </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>Messages</h4>
+      <% @messages.each do |message| %>
+        <p><strong><%= message.user.first_name %>:</strong> <%= message.content %></p>
+      <% end %>
     </div>
   </div>
 </div>
