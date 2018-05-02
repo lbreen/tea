@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   root to: 'pages#home'
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
@@ -14,7 +16,4 @@ Rails.application.routes.draw do
   end
 
   get 'profile/:id', to: 'pages#user_profile', as: :user_profile
-
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

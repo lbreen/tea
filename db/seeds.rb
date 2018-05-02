@@ -2,6 +2,7 @@ Group.destroy_all
 User.destroy_all
 Friendship.destroy_all
 GroupMember.destroy_all
+Message.destroy_all
 
 users = []
 
@@ -48,12 +49,18 @@ colours.each_with_index do |colour, index|
   group.save!
 end
 
+groups = Group.all
 
 Friendship.create!(user: users[0], friend: users[3], status: "accepted")
 not_admin_group = Group.new(name: "Not admin", admin: users[0])
 not_admin_group.members = [admin, users[3]]
 not_admin_group.save!
 
+group = Group.all[0]
+Message.create(user: admin, group: group, content: "Who's turn is it?")
+Message.create(user: users[0], group: group, content: "Pretty sure its Will's turn...")
+Message.create(user: users[1], group: group, content: "No wuz but joe's last brew was poor")
+Message.create(user: users[2], group: group, content: "Pfft, you let it go cold")
 
 puts "DB seeded successfully"
 
