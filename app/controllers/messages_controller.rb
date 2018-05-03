@@ -3,7 +3,6 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-    binding.pry
     @message.group = @group
     @message.user = current_user
     authorize @message
@@ -12,6 +11,8 @@ class MessagesController < ApplicationController
         message: @message.content,
         user: @message.user.first_name
       head :ok
+    else
+      redirect_to group_path(@group)
     end
   end
 
