@@ -36,7 +36,14 @@
       </div>
     </div>
     <div class="col-xs-6">
-      <%= render 'message_column', messages: @messages, message: @message, group: @group %>
+      <h4>Messages</h4>
+        <div id="messages">
+          <% @messages.each do |message| %>
+            <%= render 'messages/message', message: message %>
+          <% end %>
+        </div>
+      <br>
+      <%= render 'messages/message_form', group: @group, message: @message %>
     </div>
   </div>
 </div>

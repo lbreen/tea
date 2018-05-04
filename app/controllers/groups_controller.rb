@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
     @members.sort!{ |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
     @message = Message.new
-    @messages = Message.select { |message| message.group == @group }
+    @messages = Message.select { |message| message.group == @group }.sort
   end
 
   def new
