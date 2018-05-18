@@ -1,22 +1,26 @@
 const messageFormContent = document.querySelector('#message_content');
 const messages = document.querySelector("#messages");
 
-App.messages = App.cable.subscriptions.create('MessagesChannel', {
-  received: function(data) {
-    messageFormContent.value = ''
-    return messages.insertAdjacentHTML('beforeend', this.messageHTML(data));
-  },
+<% Group.all.each do |group| %>
 
-  messageHTML: function(data) {
-    return `
-    <div class="message">
-      <div class="message-user">
-        ${data.first_name} ${data.created_at}
+  App['group' + <%= group.id %>] = App.cable.subscriptions.create({channel: 'MessagesChannel', group_id: <%= group.id %> }, {
+    received: function(data) {
+      console.log('received')
+      messageFormContent.value = ''
+      return messages.insertAdjacentHTML('beforeend', this.messageHTML(data));
+    },
+
+    messageHTML: function(data) {
+      return `
+      <div class="message">
+        <div class="message-user">
+          ${data.first_name} ${data.created_at}
+        </div>
+        <div class="message-content">
+          ${data.content}
+        </div>
       </div>
-      <div class="message-content">
-        ${data.content}
-      </div>
-    </div>
-    `;
-  }
-});
+      `;
+    }
+  });
+<% end %>

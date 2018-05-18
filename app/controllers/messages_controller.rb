@@ -7,10 +7,11 @@ class MessagesController < ApplicationController
     @message.user = current_user
     authorize @message
     if @message.save
-      ActionCable.server.broadcast 'messages',
+      ActionCable.server.broadcast "group-#{@group.id}:messages",
         content: @message.content,
         first_name: @message.user.first_name,
-        created_at: @message.created_at.strftime('%H:%M')
+        created_at: @message.created_at.strftime('%H:%M'),
+        group_id: @group.id
       head :ok
     else
       redirect_to group_path(@group)
