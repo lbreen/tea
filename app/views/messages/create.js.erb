@@ -1,0 +1,7 @@
+<% if @message.errors %>
+  const errorMessage = '<%= @message.errors.messages.first %>';
+  console.log(errorMessage);
+  document.querySelector('#message-form-errors').innerText = errorMessage;
+<% else %>
+
+<% end %>

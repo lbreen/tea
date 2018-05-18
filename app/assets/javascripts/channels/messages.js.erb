@@ -5,7 +5,7 @@ const messages = document.querySelector("#messages");
 
   App['group' + <%= group.id %>] = App.cable.subscriptions.create({channel: 'MessagesChannel', group_id: <%= group.id %> }, {
     received: function(data) {
-      console.log('received')
+      console.log()
       messageFormContent.value = ''
       return messages.insertAdjacentHTML('beforeend', this.messageHTML(data));
     },
@@ -14,10 +14,10 @@ const messages = document.querySelector("#messages");
       return `
       <div class="message">
         <div class="message-user">
-          ${data.first_name} ${data.created_at}
+          ${data.message.first_name} ${data.message.created_at}
         </div>
         <div class="message-content">
-          ${data.content}
+          ${data.message.content}
         </div>
       </div>
       `;

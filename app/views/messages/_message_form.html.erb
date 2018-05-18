@@ -1,4 +1,5 @@
 <%= simple_form_for([group, message], remote: true) do |f| %>
+  <div id="message-form-errors"></div>
   <%= f.input :content, as: :string, label: false %>
 
   <%= f.button :submit, class: "btn btn-primary" %>
