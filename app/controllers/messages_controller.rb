@@ -7,9 +7,9 @@ class MessagesController < ApplicationController
     @message.user = current_user
     authorize @message
     if @message.save
-      ActionCable.server.broadcast "group-#{@group.id}:messages",
-        message: @message
-      head :ok
+      # ActionCable.server.broadcast "group-#{@group.id}:messages",
+      #   message: @message
+      # head :ok
     else
       respond_to do |format|
         format.html { redirect_to groups_path(@group) }

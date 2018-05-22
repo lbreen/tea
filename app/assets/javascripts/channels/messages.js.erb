@@ -1,26 +1,26 @@
-const messageFormContent = document.querySelector('#message_content');
-const messages = document.querySelector("#messages");
+var messageFormContent = document.querySelector('#message_content');
+var messages = document.querySelector("#messages");
 
 <% Group.all.each do |group| %>
 
   App['group' + <%= group.id %>] = App.cable.subscriptions.create({channel: 'MessagesChannel', group_id: <%= group.id %> }, {
     received: function(data) {
-      console.log()
-      messageFormContent.value = ''
-      return messages.insertAdjacentHTML('beforeend', this.messageHTML(data));
+      // data.message is pre-rendered html from the partial _message.html.erb
+      return messages.insertAdjacentHTML('beforeend', data.message);
     },
-
-    messageHTML: function(data) {
-      return `
-      <div class="message">
-        <div class="message-user">
-          ${data.message.first_name} ${data.message.created_at}
-        </div>
-        <div class="message-content">
-          ${data.message.content}
-        </div>
-      </div>
-      `;
-    }
   });
 <% end %>
+
+var submitBtn = document.querySelector('#message_form_submit')
+// THIS DOESN'T RENEW WHEN MOVING BETWEEN WEBPAGES, ONLY ON A FORCED RELOAD...
+submitBtn.addEventListener('click', (event) => {
+  submitMessage()
+})
+
+function submitMessage(){
+  console.log("submitting message...")
+  var content = messageFormContent.value
+  var groupId = document.querySelector('[data-group]').dataset.group
+  App['group' + groupId].send({content: content, group_id: groupId})
+  messageFormContent.value = "";
+}

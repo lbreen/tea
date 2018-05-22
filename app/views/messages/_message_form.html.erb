@@ -1,6 +1,4 @@
-<%= simple_form_for([group, message], remote: true) do |f| %>
-  <div id="message-form-errors"></div>
-  <%= f.input :content, as: :string, label: false %>
+<input class="form-control" data-input="message" name="message[content]" id="message_content">
+</input>
 
-  <%= f.button :submit, class: "btn btn-primary" %>
-<% end %>
+<input type="submit" name="commit" value="Send" class="btn btn-primary" style="" data-send="message" id="message_form_submit" data-disable-with="send" />
