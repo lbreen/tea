@@ -38,8 +38,11 @@
     <div class="col-xs-12 col-md-6">
       <h4>Messages</h4>
         <div id="messages" data-group=<%= @group.id %>>
-          <% @messages.each do |message| %>
-            <%= render 'messages/message', message: message %>
+          <% @messages.each do |date, messages| %>
+            <div class="message-date" ><%= date %></div>
+            <% messages.each do |message| %>
+              <%= render 'messages/message', message: message %>
+            <% end %>
           <% end %>
         </div>
       <br>

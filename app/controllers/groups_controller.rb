@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
     @members.sort!{ |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
     @message = Message.new
-    @messages = Message.select { |message| message.group == @group }.sort
+    @messages = format_messages_array(@group.messages.sort)
   end
 
   def new
@@ -65,5 +65,17 @@ class GroupsController < ApplicationController
 
   def group_statistics
     {'Total drinks made' => 0, 'Avg. person per round' => 0, 'Hours since last brew' => 0}
+  end
+
+  def format_messages_array(messages)
+    hash = {}
+
+    messages.each do |message|
+      time = message.created_at.strftime('%D')
+      hash[time] = [] if hash[time].nil?
+
+      hash[time] << message
+    end
+    return hash
   end
 end

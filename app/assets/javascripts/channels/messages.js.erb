@@ -11,16 +11,25 @@ var messages = document.querySelector("#messages");
   });
 <% end %>
 
-var submitBtn = document.querySelector('#message_form_submit')
+// var submitBtn = document.querySelector('#message_form_submit');
 // THIS DOESN'T RENEW WHEN MOVING BETWEEN WEBPAGES, ONLY ON A FORCED RELOAD...
-submitBtn.addEventListener('click', (event) => {
-  submitMessage()
-})
+// submitBtn.addEventListener('click', (event) => {
+//   submitMessage()
+// });
+
+messageFormContent.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    submitMessage()
+  }
+});
 
 function submitMessage(){
-  console.log("submitting message...")
   var content = messageFormContent.value
   var groupId = document.querySelector('[data-group]').dataset.group
+
+  if (content == '') { return false }
+
   App['group' + groupId].send({content: content, group_id: groupId})
-  messageFormContent.value = "";
-}
+
+  messageFormContent.value = "" // Reset text input
+};
