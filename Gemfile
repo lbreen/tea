@@ -16,7 +16,6 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem 'turbolinks', '~> 5.0.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -11,17 +11,16 @@ var messages = document.querySelector("#messages");
   });
 <% end %>
 
-// var submitBtn = document.querySelector('#message_form_submit');
-// THIS DOESN'T RENEW WHEN MOVING BETWEEN WEBPAGES, ONLY ON A FORCED RELOAD...
-// submitBtn.addEventListener('click', (event) => {
-//   submitMessage()
-// });
+if (messageFormContent === null) {
 
-messageFormContent.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    submitMessage()
-  }
-});
+} else {
+  messageFormContent.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      submitMessage()
+    }
+  });
+}
+
 
 function submitMessage(){
   var content = messageFormContent.value
