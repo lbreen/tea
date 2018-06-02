@@ -5,8 +5,11 @@ var messages = document.querySelector("#messages");
 
   App['group' + <%= group.id %>] = App.cable.subscriptions.create({channel: 'MessagesChannel', group_id: <%= group.id %> }, {
     received: function(data) {
+      console.log(data)
+      html = data.date + data.message
+      // console.log(data.date + date.message)
       // data.message is pre-rendered html from the partial _message.html.erb
-      return messages.insertAdjacentHTML('beforeend', data.message);
+      return messages.insertAdjacentHTML('beforeend', html);
     },
   });
 <% end %>
@@ -21,12 +24,11 @@ if (messageFormContent === null) {
   });
 }
 
-
 function submitMessage(){
   var content = messageFormContent.value
-  var groupId = document.querySelector('[data-group]').dataset.group
-
   if (content == '') { return false }
+
+  var groupId = document.querySelector('[data-group]').dataset.group
 
   App['group' + groupId].send({content: content, group_id: groupId})
 

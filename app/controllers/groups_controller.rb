@@ -71,10 +71,15 @@ class GroupsController < ApplicationController
     hash = {}
 
     messages.each do |message|
-      time = message.created_at.strftime('%D')
-      hash[time] = [] if hash[time].nil?
+      if Date.today == message.created_at.to_date
+        date = "Today"
+      else
+        date = message.created_at.strftime('%D')
+      end
 
-      hash[time] << message
+      hash[date] = [] if hash[date].nil?
+
+      hash[date] << message
     end
     return hash
   end
