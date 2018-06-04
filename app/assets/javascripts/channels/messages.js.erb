@@ -5,7 +5,6 @@ var messages = document.querySelector("#messages");
 
   App['group' + <%= group.id %>] = App.cable.subscriptions.create({channel: 'MessagesChannel', group_id: <%= group.id %> }, {
     received: function(data) {
-      console.log(data)
       html = data.date + data.message
       // console.log(data.date + date.message)
       // data.message is pre-rendered html from the partial _message.html.erb

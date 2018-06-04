@@ -1,6 +1,8 @@
 #messages {
   display: flex;
   flex-direction: column;
+  height: 250px;
+  overflow-y: auto;
 }
 
 .message {

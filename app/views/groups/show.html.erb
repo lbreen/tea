@@ -65,6 +65,19 @@
     const btn = document.querySelector("#removeAMemberBtn");
 
     btn.addEventListener("click", revealBtns);
+
+    // Scroll messages panel to the bottom on page load
+    var messages = document.getElementById('messages');
+    scrollToBottom();
+
+    // Scroll messages to bottom on new message
+    var observer = new MutationObserver(scrollToBottom);
+    const config = { childList: true };
+    observer.observe(messages, config);
+
+    function scrollToBottom() {
+      messages.scrollTop = messages.scrollHeight;
+    }
   });
 </script>
 

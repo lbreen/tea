@@ -31,10 +31,11 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'launchy'
+  gem 'faker'
 end
 
-gem 'faker'
 gem 'pundit'
+gem 'kaminari'
 
-gem "sprockets"
-gem "sprockets-es6"
+gem 'sprockets'
+gem 'sprockets-es6'
