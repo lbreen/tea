@@ -13,7 +13,8 @@ class GroupsController < ApplicationController
     @members.sort!{ |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
     @message = Message.new
-    @messages = format_messages_array(@group.messages.sort)
+    unformatted_messages = @group.messages.reverse_order.page().per(10).reverse
+    @messages = format_messages(unformatted_messages)
   end
 
   def new
@@ -67,7 +68,7 @@ class GroupsController < ApplicationController
     {'Total drinks made' => 0, 'Avg. person per round' => 0, 'Hours since last brew' => 0}
   end
 
-  def format_messages_array(messages)
+  def format_messages(messages)
     hash = {}
 
     messages.each do |message|

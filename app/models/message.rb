@@ -3,6 +3,8 @@ class Message < ApplicationRecord
   belongs_to :user
   validates :content, presence: true
 
+  paginates_per 10
+
   after_create_commit {broadcast_message}
 
   def broadcast_message
