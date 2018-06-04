@@ -1,4 +1,4 @@
-module UsersHelper
+module UserHelper
   def user_avatar_photo(user, attributes = {})
     classes = attributes[:class] || ""
     data_toggle = attributes[:data_toggle] || ""

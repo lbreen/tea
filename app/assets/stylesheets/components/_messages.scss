@@ -1,0 +1,40 @@
+#messages {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.message {
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.message-content {
+  font-size: 15px;
+}
+
+.message-user {
+  font-size: 10px;
+}
+
+.message-date {
+  font-size: 15px;
+  background-color: white;
+  text-align: center;
+  border-radius: 20px;
+  align-self: center;
+  width: 150px;
+  margin: 15px;
+  font-weight: lighter;
+}
+
+#message_form_submit {
+  position: relative;
+  bottom: 55px;
+  left: 520px;
+  border-radius: 50%;
+  height: 70px;
+}

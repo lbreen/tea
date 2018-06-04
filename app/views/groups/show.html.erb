@@ -16,7 +16,10 @@
           </div>
         <% end %>
       </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
       <div class="group-members">
+        <h4>Group Members</h4>
         <% @members.each do |member| %>
           <div class="group-member">
             <% if current_user.group_admin?(@group) %>
@@ -31,6 +34,19 @@
           </div>
         <% end %>
       </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <h4>Messages</h4>
+        <div id="messages" data-group=<%= @group.id %>>
+          <% @messages.each do |date, messages| %>
+            <%= render 'messages/message_date', date: date %>
+            <% messages.each do |message| %>
+              <%= render 'messages/message', message: message %>
+            <% end %>
+          <% end %>
+        </div>
+      <br>
+      <%= render 'messages/message_form', group: @group, message: @message %>
     </div>
   </div>
 </div>
@@ -49,6 +65,19 @@
     const btn = document.querySelector("#removeAMemberBtn");
 
     btn.addEventListener("click", revealBtns);
-});
+
+    // Scroll messages panel to the bottom on page load
+    var messages = document.getElementById('messages');
+    scrollToBottom();
+
+    // Scroll messages to bottom on new message
+    var observer = new MutationObserver(scrollToBottom);
+    const config = { childList: true };
+    observer.observe(messages, config);
+
+    function scrollToBottom() {
+      messages.scrollTop = messages.scrollHeight;
+    }
+  });
 </script>
 

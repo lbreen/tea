@@ -4,10 +4,10 @@ ruby '2.3.5'
 gem 'devise'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
-gem 'pg'
+gem 'pg', '~> 0.18'
 gem 'puma'
 gem 'rails', '5.1.4'
-gem 'redis'
+gem 'redis', '~> 3.3', '>= 3.3.1'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
@@ -31,10 +31,11 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'launchy'
+  gem 'faker'
 end
 
-gem 'faker'
 gem 'pundit'
+gem 'kaminari'
 
-gem "sprockets"
-gem "sprockets-es6"
+gem 'sprockets'
+gem 'sprockets-es6'
