@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     @messages_html = @messages.map do |message|
       ApplicationController.renderer.render(
         partial: 'messages/message',
-        locals: { message: message }
+        locals: { message: message, current_user: current_user }
       )
     end
 
