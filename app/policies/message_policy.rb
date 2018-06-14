@@ -1,7 +1,8 @@
 class MessagePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      # user == a group instance
+      scope.where(group_id: user.id)
     end
   end
 

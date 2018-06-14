@@ -1,0 +1,16 @@
+<div class="group-members">
+  <h4>Group Members</h4>
+  <% members.each do |member| %>
+    <div class="group-member">
+      <% if current_user.group_admin?(group) %>
+        <%= link_to group_group_member_path(group, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "remove-members hidden" do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+      <% end %>
+      <p><%= member.full_name %> </p>
+      <% if member.group_admin?(group) %>
+        <p class="admin-badge"><%= "Admin" %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

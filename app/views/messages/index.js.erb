@@ -1,0 +1,21 @@
+var messagesPanel = document.getElementById('messages');
+
+<% if @messages_html.empty? %>
+  var loadIcon = document.getElementById('message-load-icon');
+  loadIcon.style.display = 'none';
+<% else %>
+
+  var lastMessage = document.querySelectorAll('.message')[0];
+
+  var paginationCounter = document.getElementById('pagination_counter');
+  paginationCounter.value = parseInt(paginationCounter.value) + 1;
+
+  <% @messages_html.each do |message_html| %>
+    messagesPanel.insertAdjacentHTML('afterBegin', `<%= message_html %>`);
+    lastMessage.scrollIntoView({behaviour: 'smooth', block: 'center'});
+  <% end %>
+
+
+<% end %>
+
+
