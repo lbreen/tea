@@ -62,11 +62,11 @@
     scrollToBottom();
 
     // Scroll messages to bottom on new message
-    var observer = new MutationObserver(scrollToBottom);
-    var messages = document.getElementById('messages');
-    const config = { childList: true };
+    // var observer = new MutationObserver(scrollToBottom);
+    // var messages = document.getElementById('messages');
+    // const config = { childList: true };
 
-    observer.observe(messages, config);
+    // observer.observe(messages, config);
 
     function scrollToBottom() {
       messagesPanel.scrollTop = messagesPanel.scrollHeight;
@@ -88,7 +88,6 @@
 
     var loadIconInView = (messageTitle, loadIcon) => {
       var diff = loadIcon.getBoundingClientRect().y - messageTitle.getBoundingClientRect().y
-      console.log(diff)
       if (diff > 62 ) {
         return true
       } else {
