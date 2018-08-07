@@ -13,8 +13,7 @@ class GroupsController < ApplicationController
     @members.sort!{ |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
     @message = Message.new
-    unformatted_messages = @group.messages.reverse_order.page().per(10).reverse
-    @messages = format_messages(unformatted_messages)
+    @messages = @group.messages.reverse_order.page.reverse
   end
 
   def new
@@ -66,22 +65,5 @@ class GroupsController < ApplicationController
 
   def group_statistics
     {'Total drinks made' => 0, 'Avg. person per round' => 0, 'Hours since last brew' => 0}
-  end
-
-  def format_messages(messages)
-    hash = {}
-
-    messages.each do |message|
-      if Date.today == message.created_at.to_date
-        date = "Today"
-      else
-        date = message.created_at.strftime('%D')
-      end
-
-      hash[date] = [] if hash[date].nil?
-
-      hash[date] << message
-    end
-    return hash
   end
 end

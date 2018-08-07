@@ -1,14 +1,24 @@
-var messageFormContent = document.querySelector('#message_content');
-var messages = document.querySelector("#messages");
+var messageFormContent = document.getElementById('message_content');
+var messages = document.getElementById('messages');
+var messagesPanel = document.getElementById('messages-panel');
+
+var observer = new MutationObserver(scrollToBottom);
+var messages = document.getElementById('messages');
+const config = { childList: true };
+
+function scrollToBottom() {
+  messagesPanel.scrollTop = messagesPanel.scrollHeight;
+}
 
 <% Group.all.each do |group| %>
 
   App['group' + <%= group.id %>] = App.cable.subscriptions.create({channel: 'MessagesChannel', group_id: <%= group.id %> }, {
     received: function(data) {
-      html = data.date + data.message
-      // console.log(data.date + date.message)
+      // Scroll to last message on new message
+      observer.observe(messages, config);
+
       // data.message is pre-rendered html from the partial _message.html.erb
-      return messages.insertAdjacentHTML('beforeend', html);
+      return messages.insertAdjacentHTML('beforeend', data.message);
     },
   });
 <% end %>
@@ -27,7 +37,7 @@ function submitMessage(){
   var content = messageFormContent.value
   if (content == '') { return false }
 
-  var groupId = document.querySelector('[data-group]').dataset.group
+  var groupId = messages.dataset.group
 
   App['group' + groupId].send({content: content, group_id: groupId})
 

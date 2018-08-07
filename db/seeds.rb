@@ -1,9 +1,10 @@
+puts 'Cleansing DB...'
 Group.destroy_all
 User.destroy_all
 Friendship.destroy_all
 GroupMember.destroy_all
 Message.destroy_all
-
+puts 'DB destroyed! Mwhahahaha'
 users = []
 
 admin = User.create!(email: 'l.b@gmail.com', first_name: 'Luke', last_name: 'Breen', password: '123456')
@@ -20,11 +21,14 @@ User.create!(email: 'v.botella@gmail.com', first_name: 'Victoria', last_name: 'B
 User.create!(email: 'm.heller@gmail.com', first_name: 'Matt', last_name: 'Heller', password: '123456')
 User.create!(email: 's.lacey@gmail.com', first_name: 'Sam', last_name: 'Lacey', password: '123456')
 
+puts 'Created users'
 
 Friendship.create!(user: admin, friend: users[0], status: "accepted")
 Friendship.create!(user: admin, friend: users[1], status: "accepted")
 Friendship.create!(user: admin, friend: users[2], status: "pending")
 Friendship.create!(user: admin, friend: users[3], status: "pending")
+
+puts 'Created friendships between users'
 
 colours = ['rgb(255, 45, 45)', 'rgb(97, 216, 249)', 'rgb(72, 48, 255)', 'rgb(0, 165, 35)', 'rgb(216, 76, 255)', 'rgb(255, 255, 255)']
 
@@ -49,6 +53,8 @@ colours.each_with_index do |colour, index|
   group.save!
 end
 
+puts 'Created groups'
+
 groups = Group.all
 
 Friendship.create!(user: users[0], friend: users[3], status: "accepted")
@@ -61,8 +67,8 @@ Message.create(user: admin, group: group, content: "Who's turn is it?")
 Message.create(user: users[0], group: group, content: "Pretty sure its Will's turn...")
 Message.create(user: users[1], group: group, content: "No wuz but joe's last brew was poor")
 Message.create(user: users[2], group: group, content: "Pfft, you let it go cold")
-
-puts "DB seeded successfully"
+puts 'Created messages'
+puts 'DB seeded successfully'
 
 
 

@@ -1,8 +1,13 @@
-#messages {
+#messages-panel {
   display: flex;
   flex-direction: column;
   height: 250px;
   overflow-y: auto;
+}
+
+#messages {
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
@@ -10,6 +15,7 @@
   border-radius: 5px;
   margin: 5px 0;
   padding: 5px;
+  width: 70%;
 }
 
 .message-content {
@@ -37,4 +43,13 @@
   left: 520px;
   border-radius: 50%;
   height: 70px;
+}
+
+#message-load-icon {
+  align-self: center;
+  background-color: white;
+  text-align: center;
+  border-radius: 50%;
+  width: 25px;
+  margin: 25px 0 ;
 }

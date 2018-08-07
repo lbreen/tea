@@ -1,22 +1,37 @@
 class MessagesController < ApplicationController
-  before_action :find_group, only: [ :create ]
+  before_action :find_group, only: [ :index, :create ]
 
-  def create
-    @message = Message.new(message_params)
-    @message.group = @group
-    @message.user = current_user
-    authorize @message
-    if @message.save
-      # ActionCable.server.broadcast "group-#{@group.id}:messages",
-      #   message: @message
-      # head :ok
-    else
-      respond_to do |format|
-        format.html { redirect_to groups_path(@group) }
-        format.js
-      end
+  def index
+    @messages = policy_scope(Message).reverse_order.page(params[:page])
+
+    @messages_html = @messages.map do |message|
+      ApplicationController.renderer.render(
+        partial: 'messages/message',
+        locals: { message: message, current_user: current_user }
+      )
+    end
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to group_path(@group) }
     end
   end
+
+  # def create
+    # @message = Message.new(message_params)
+    # @message.group = @group
+    # @message.user = current_user
+    # authorize @message
+
+    # if @message.save!
+
+    # else
+    #   respond_to do |format|
+    #     format.html { redirect_to group_path(@group) }
+    #     format.js
+    #   end
+    # end
+  # end
 
   private
 
@@ -26,5 +41,9 @@ class MessagesController < ApplicationController
 
   def find_group
     @group = Group.find(params[:group_id])
+  end
+
+  def pundit_user
+    @group
   end
 end
