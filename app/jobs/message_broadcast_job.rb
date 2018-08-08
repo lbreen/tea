@@ -1,11 +1,10 @@
 class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(payload)
+  def perform(message)
     ActionCable.server.broadcast(
-      "group-#{payload[:message].group.id}:messages",
-      message: render_message(payload[:message])
-      # date: render_date(payload[:new_date])
+      "group-#{message.group_id}:messages",
+      message: render_message(message)
       )
   end
 
@@ -17,15 +16,4 @@ class MessageBroadcastJob < ApplicationJob
       locals: { message: message, current_user: message.user }
       )
   end
-
-  # def render_date(new_date)
-  #   if new_date
-  #     return ApplicationController.renderer.render(
-  #             partial: 'messages/message_date',
-  #             locals: { date: "Today" }
-  #             )
-  #   else
-  #     return ''
-  #   end
-  # end
 end

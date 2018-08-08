@@ -6,7 +6,7 @@ class MessagesChannel < ApplicationCable::Channel
   def receive(payload)
     Message.create(
       content: payload['content'],
-      group_id: payload['group_id'],
+      group_id: params['group_id'],
       user: current_user
     )
   end

@@ -1,9 +1,9 @@
 var messageFormContent = document.getElementById('message_content');
-var messages = document.getElementById('messages');
+// var messages = document.getElementById('messages');
 var messagesPanel = document.getElementById('messages-panel');
 
 var observer = new MutationObserver(scrollToBottom);
-var messages = document.getElementById('messages');
+
 const config = { childList: true };
 
 function scrollToBottom() {
@@ -18,8 +18,12 @@ function scrollToBottom() {
       observer.observe(messages, config);
 
       // data.message is pre-rendered html from the partial _message.html.erb
-      return messages.insertAdjacentHTML('beforeend', data.message);
+      return document.querySelector("[data-group='"+ this.groupId + "']").insertAdjacentHTML('beforeend', data.message);
     },
+
+    setGroupId: function(groupId) {
+      this.groupId = groupId
+    }
   });
 <% end %>
 
@@ -34,12 +38,13 @@ if (messageFormContent === null) {
 }
 
 function submitMessage(){
+  var messages = document.getElementById('messages');
   var content = messageFormContent.value
   if (content == '') { return false }
 
   var groupId = messages.dataset.group
-
-  App['group' + groupId].send({content: content, group_id: groupId})
+  App['group' + groupId].setGroupId(groupId)
+  App['group' + groupId].send({content: content})
 
   messageFormContent.value = "" // Reset text input
 };
