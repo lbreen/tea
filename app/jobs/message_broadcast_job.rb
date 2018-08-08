@@ -3,7 +3,7 @@ class MessageBroadcastJob < ApplicationJob
 
   def perform(message)
     ActionCable.server.broadcast(
-      "group-#{message.group_id}:messages",
+      "group#{message.group_id}:messages",
       message: render_message(message)
       )
   end
