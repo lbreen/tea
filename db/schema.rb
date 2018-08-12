@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501155731) do
+ActiveRecord::Schema.define(version: 20180808073859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "drink_notifications", force: :cascade do |t|
+    t.integer "limit"
+    t.integer "status"
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_drink_notifications_on_group_id"
+    t.index ["user_id"], name: "index_drink_notifications_on_user_id"
+  end
+
+  create_table "drink_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "drink_notification_id"
+    t.string "drink_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drink_notification_id"], name: "index_drink_requests_on_drink_notification_id"
+    t.index ["user_id"], name: "index_drink_requests_on_user_id"
+  end
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -70,6 +91,10 @@ ActiveRecord::Schema.define(version: 20180501155731) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "drink_notifications", "groups"
+  add_foreign_key "drink_notifications", "users"
+  add_foreign_key "drink_requests", "drink_notifications"
+  add_foreign_key "drink_requests", "users"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
   add_foreign_key "groups", "users"

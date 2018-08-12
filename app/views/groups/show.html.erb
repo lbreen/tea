@@ -5,6 +5,7 @@
     <% end %>
     <%= render 'group_admin_options' %>
   </div>
+
   <div class="row">
     <div class="col-xs-12">
       <h2 class="text-center"><%= @group.name %></h2>
@@ -16,6 +17,9 @@
           </div>
         <% end %>
       </div>
+    </div>
+    <div class="col-xs-12 text-center">
+      <button class="btn btn-primary" id="tea-button" data-tea-group=<%= @group.id %>>Make tea</button>
     </div>
     <div class="col-xs-12 col-md-6">
       <%= render 'groups/group_members', group: @group, members: @members %>

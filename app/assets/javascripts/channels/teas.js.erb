@@ -1,0 +1,16 @@
+App.teas = App.cable.subscriptions.create('TeasChannel', {
+  received: function(data) {
+
+    return console.log('received')
+  }
+});
+
+var teaBtn = document.getElementById('tea-button');
+
+teaBtn.addEventListener('click', (event) => {
+  submitRequest();
+});
+
+function submitRequest() {
+
+}
