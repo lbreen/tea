@@ -1,7 +1,7 @@
 class DrinkNotification < ApplicationRecord
   belongs_to :user
   belongs_to :group
-  has_many :drink_requests
+  has_many :drink_requests, dependent: :destroy
 
   validates :limit, presence: true
   validates :limit, numericality: { only_integer: true, greater_than: 0 }
