@@ -27,21 +27,39 @@
             <input id="pagination_counter" type="text" name="page" value="2" class="hidden">
           </form>
           <div id="message-load-icon"><i class="fas fa-spin fa-sync-alt"></i></div>
-          <div id="messages" data-group=<%= @group.id %>>
+          <div id="messages">
             <% @messages.each do |message| %>
               <%= render 'messages/message', message: message %>
             <% end %>
           </div>
         </div>
       <br>
-      <%= render 'messages/message_form', group: @group, message: @message %>
+      <div id="create-message">
+        <%= simple_form_for [@group, Message.new], remote: true do |f| %>
+          <%= f.input :content, label: false %>
+          <%= f.submit %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
 <%= render 'add_new_member_modal', group: @group, group_member: @group_member %>
 
-<script type="text/javascript">
+<% content_for :after_js do %>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      scrollLastMessageIntoView();
+
+      App['group_<%= @group.id %>'] = App.cable.subscriptions.create(
+        { channel: 'GroupsChannel', group_id: <%= @group.id %> },
+        { received: (data) => console.log(data) }
+      )
+    });
+
+  </script>
+<% end %>
+<!-- <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", () => {
 
     const revealBtns = (event) => {
@@ -97,5 +115,5 @@
 
     // messagesPanel.addEventListener('scroll', getOldMessages());
   });
-</script>
+</script> -->
 
