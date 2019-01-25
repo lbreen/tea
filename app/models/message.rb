@@ -9,14 +9,17 @@ class Message < ApplicationRecord
 
   def broadcast_message
     ActionCable.server.broadcast("group_#{group.id}", {
-      message_partial: ApplicationController.renderer.render(
-        partial: "messages/message",
-      locals: { message: self }
-      ),
+      message_partial: render_message(self),
       current_user_id: user.id
     })
   end
 
+  def render_message(message)
+    message = ApplicationController.renderer.render(
+      partial: 'messages/message',
+      locals: { message: message, current_user: message.user }
+    )
+  end
   # after_create_commit {broadcast_message}
 
   # def broadcast_message
