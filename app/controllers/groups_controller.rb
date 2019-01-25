@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :colours, only: [:new, :create]
-  before_action :find_group, only: [:show, :add_member]
+  before_action :find_group, only: [:show]
 
   def index
     @groups = policy_scope(Group)
