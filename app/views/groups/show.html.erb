@@ -29,14 +29,14 @@
           <div id="message-load-icon"><i class="fas fa-spin fa-sync-alt"></i></div>
           <div id="messages">
             <% @messages.each do |message| %>
-              <%= render 'messages/message', message: message %>
+              <%= render 'messages/message', message: message, user_is_author: message.user == current_user %>
             <% end %>
           </div>
         </div>
       <br>
       <div id="create-message">
         <%= simple_form_for [@group, Message.new], remote: true do |f| %>
-          <%= f.input :content, label: false %>
+          <%= f.input :content, as: :string, label: false %>
           <%= f.submit %>
         <% end %>
       </div>

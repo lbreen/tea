@@ -17,7 +17,7 @@ class Message < ApplicationRecord
   def render_message(message)
     message = ApplicationController.renderer.render(
       partial: 'messages/message',
-      locals: { message: message, current_user: message.user }
+      locals: { message: message, user_is_author: false }
     )
   end
   # after_create_commit {broadcast_message}

@@ -25,7 +25,10 @@
 .message-user {
   font-size: 10px;
 }
-
+.right {
+  align-self: flex-end;
+  text-align: right;
+}
 .message-date {
   font-size: 15px;
   background-color: white;
