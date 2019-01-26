@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     @rendered_messages = @messages.map do |message|
       ApplicationController.renderer.render(
         partial: 'messages/message',
-        locals: { message: message, user_is_author: true }
+        locals: { message: message, user_is_author: current_user == message.user }
       )
     end
 
