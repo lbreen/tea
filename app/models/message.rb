@@ -3,7 +3,7 @@ class Message < ApplicationRecord
   belongs_to :user
   validates :content, presence: true
 
-  paginates_per 10
+  paginates_per 10 # Kaminari gem config
 
   after_create :broadcast_message
 
@@ -20,27 +20,4 @@ class Message < ApplicationRecord
       locals: { message: message, user_is_author: false }
     )
   end
-  # after_create_commit {broadcast_message}
-
-  # def broadcast_message
-  #   MessageBroadcastJob.perform_now({
-  #     message: self,
-  #     new_date: message_on_new_date?(self)
-  #   })
-  # end
-
-  # private
-
-  # def message_on_new_date?(message)
-  #   if message.group.messages[-2].nil?
-  #     # Message is the first in the group
-  #     return true
-  #   elsif Date.today == message.group.messages[-2].created_at.to_date
-  #     # Previous message from today
-  #     return false
-  #   else
-  #     # First message of the day
-  #     return true
-  #   end
-  # end
 end
