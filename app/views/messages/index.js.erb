@@ -1,19 +1,28 @@
-var messagesPanel = document.getElementById('messages');
-
-<% if @messages_html.empty? %>
+<% if @messages.empty? %>
   var loadIcon = document.getElementById('message-load-icon');
   loadIcon.style.display = 'none';
 <% else %>
-
-  var lastMessage = document.querySelectorAll('.message')[0];
+  var messages = document.getElementById('messages');
+  var lastMessageViewed = document.querySelectorAll('.message')[0]
 
   var paginationCounter = document.getElementById('pagination_counter');
   paginationCounter.value = parseInt(paginationCounter.value) + 1;
 
-  <% @messages_html.each do |message_html| %>
-    messagesPanel.insertAdjacentHTML('afterBegin', `<%= message_html %>`);
-    lastMessage.scrollIntoView({behaviour: 'smooth', block: 'center'});
+  <% @rendered_messages.each do |r_message| %>
+
+    messages.insertAdjacentHTML('afterbegin', `<%= r_message %>`);
+    lastMessageViewed.scrollIntoView({behaviour: 'smooth', block: "center"});
+
   <% end %>
+  // var lastMessage = document.querySelectorAll('.message')[0];
+
+  // var paginationCounter = document.getElementById('pagination_counter');
+  // paginationCounter.value = parseInt(paginationCounter.value) + 1;
+
+  // <% @messages.each do |message| %>
+  //   messagesPanel.insertAdjacentHTML('afterBegin', `<%= message %>`);
+  //   lastMessage.scrollIntoView({behaviour: 'smooth', block: 'center'});
+  // <% end %>
 
 
 <% end %>

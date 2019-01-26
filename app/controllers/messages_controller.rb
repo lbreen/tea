@@ -1,21 +1,22 @@
 class MessagesController < ApplicationController
+  protect_from_forgery except: :index
   before_action :find_group, only: [ :index, :create ]
 
-  # def index
-  #   @messages = policy_scope(Message).reverse_order.page(params[:page])
+  def index
+    @messages = policy_scope(Message).reverse_order.page(params[:page])
 
-  #   @messages_html = @messages.map do |message|
-  #     ApplicationController.renderer.render(
-  #       partial: 'messages/message',
-  #       locals: { message: message, current_user: current_user }
-  #     )
-  #   end
+    @rendered_messages = @messages.map do |message|
+      ApplicationController.renderer.render(
+        partial: 'messages/message',
+        locals: { message: message, user_is_author: current_user == message.user }
+      )
+    end
 
-  #   respond_to do |format|
-  #     format.js
-  #     format.html { redirect_to group_path(@group) }
-  #   end
-  # end
+    respond_to do |format|
+      format.html { redirect_to group_path(@group) }
+      format.js
+    end
+  end
 
   def create
     @message = Message.new(message_params)
