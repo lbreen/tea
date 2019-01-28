@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :colours, only: [:new, :create]
+  before_action :colours, only: %i[new create]
   before_action :find_group, only: [:show]
 
   def index
@@ -9,8 +9,8 @@ class GroupsController < ApplicationController
 
   def show
     @group_member = GroupMember.new
-    @members =  @group.members.to_a + [@group.admin]
-    @members.sort!{ |x, y| x.first_name <=> y.first_name }
+    @members = @group.members.to_a + [@group.admin]
+    @members.sort! { |x, y| x.first_name <=> y.first_name }
     @group_statistics = group_statistics
     @message = Message.new
     @messages = @group.messages.reverse_order.page.reverse
@@ -55,7 +55,14 @@ class GroupsController < ApplicationController
   end
 
   def colours
-    @colours = ['rgb(255, 255, 255)', 'rgb(255, 45, 45)', 'rgb(97, 216, 249)', 'rgb(72, 48, 255)', 'rgb(0, 165, 35)', 'rgb(216, 76, 255)']
+    @colours = [
+      'rgb(255, 255, 255)',
+      'rgb(255, 45, 45)',
+      'rgb(97, 216, 249)',
+      'rgb(72, 48, 255)',
+      'rgb(0, 165, 35)',
+      'rgb(216, 76, 255)'
+    ]
   end
 
   def find_group
@@ -64,6 +71,6 @@ class GroupsController < ApplicationController
   end
 
   def group_statistics
-    {'Total drinks made' => 0, 'Avg. person per round' => 0, 'Hours since last brew' => 0}
+    { 'Total drinks made' => 0, 'Avg. person per round' => 0, 'Hours since last brew' => 0 }
   end
 end

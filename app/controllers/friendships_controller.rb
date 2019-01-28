@@ -1,8 +1,8 @@
 class FriendshipsController < ApplicationController
-  before_action :find_friendship, only: [ :update ]
+  before_action :find_friendship, only: [:update]
 
   def index
-    @users = policy_scope(User).reject { |user| user == current_user}
+    @users = policy_scope(User).reject { |user| user == current_user }
   end
 
   def create

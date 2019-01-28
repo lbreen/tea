@@ -1,4 +1,5 @@
 AllCops:
+  TargetRubyVersion: 2.5.3
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'
@@ -33,6 +34,8 @@ MissingRespondToMissing:
   Enabled: false
 MethodMissingSuper:
   Enabled: false
+MethodLength:
+  Max: 20
 Style/FrozenStringLiteralComment:
   Enabled: false
 LineLength:
