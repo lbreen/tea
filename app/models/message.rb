@@ -5,5 +5,5 @@ class Message < ApplicationRecord
 
   paginates_per 10 # Kaminari gem config
 
-  after_create { MessageBroadcastJob.perform_now(self) }
+  after_create { MessageBroadcastJob.perform_now self }
 end
