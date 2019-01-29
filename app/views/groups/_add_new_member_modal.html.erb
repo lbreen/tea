@@ -10,7 +10,7 @@
       <div class="modal-body">
         <%= simple_form_for [group, group_member] do |f| %>
 
-        <%= f.association :member, as: :check_boxes, collection: User.select{ |u| group.is_a_member?(u) == false }, label_method: :full_name, value_method: :id %>
+        <%= f.association :member, as: :check_boxes, collection: User.select{ |u| group.a_member?(u) == false && current_user.accepted_friends.include?(u) == true }, label_method: :full_name, value_method: :id %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

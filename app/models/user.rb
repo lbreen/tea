@@ -10,15 +10,15 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
 
   def full_name
-  	"#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}"
   end
 
   def members
-    self.group_members.map { |member| member.group }
+    group_members.map(&:group)
   end
 
   def group_admin?(group)
-    self == group.admin ? true : false
+    group.admin == self
   end
 
   def pending_friends
@@ -38,14 +38,14 @@ class User < ApplicationRecord
   end
 
   def retrieve_friends(status)
-    friendships = Friendship.select{ |f| f.user_id == self.id || f.friend_id == self.id }.select { |f| f.status == status }
+    friendships = Friendship.select { |f| f.user_id == id || f.friend_id == id }.select { |f| f.status == status }
 
-    friend_ids = friendships.map { |f| [f.user_id, f.friend_id] }.flatten.uniq.delete_if { |user_id| user_id == self.id }
+    friend_ids = friendships.flat_map { |f| [f.user_id, f.friend_id] }.uniq.delete_if { |user_id| user_id == id }
 
     friend_ids.map! { |id| User.find(id) }
   end
 
   def friend_requests
-    Friendship.select { |f| f.friend_id == self.id && f.status == "pending"}
+    Friendship.select { |f| f.friend_id == id && f.status == "pending" }
   end
 end
