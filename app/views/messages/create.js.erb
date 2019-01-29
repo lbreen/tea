@@ -1,10 +1,12 @@
 <% if @message.errors.any? %>
 
 <% else %>
-  const messagesContainer = document.querySelector('#messages');
+  var messagesContainer = document.querySelector('#messages');
   messagesContainer.insertAdjacentHTML('beforeend', '<%= j render "message", message: @message, user_is_author: true %>');
   scrollLastMessageIntoView();
-  const input = document.querySelector('#message_content');
+  // Clear previous message from form field
+  var input = document.querySelector('#message_content');
   input.value = '';
-  input.blur();
+  input.focus();
+  input.select();
 <% end %>

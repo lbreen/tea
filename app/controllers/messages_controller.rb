@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   protect_from_forgery except: :index
-  before_action :find_group, only: [ :index, :create ]
+  before_action :find_group, only: %i[index create]
 
   def index
     @messages = policy_scope(Message).reverse_order.page(params[:page])
