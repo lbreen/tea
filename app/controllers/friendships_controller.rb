@@ -15,16 +15,11 @@ class FriendshipsController < ApplicationController
   def update
     @friendship.update(status: params[:status])
 
-    if @friendship.save
-      respond_to do |format|
-        format.html { redirect_to request.env['HTTP_REFERER'] }
-        format.js
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to request.env['HTTP_REFERER'] }
-        format.js
-      end
+    flash[:alert] = "An error has occured." unless @friendship.save
+
+    respond_to do |format|
+      format.html { redirect_to request.env['HTTP_REFERER'] }
+      format.js
     end
   end
 

@@ -1,12 +1,12 @@
 class GroupPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.select { |group| group.is_a_member?(user) || user.group_admin?(group) }
+      scope.select { |group| group.a_member?(user) || user.group_admin?(group) }
     end
   end
 
   def show?
-    record.is_a_member?(user) || user.group_admin?(record)
+    record.a_member?(user) || user.group_admin?(record)
   end
 
   def create?

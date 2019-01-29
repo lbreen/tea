@@ -42,5 +42,7 @@ LineLength:
   Max: 120
 Style/EmptyMethod:
   Enabled: false
+Style/UnneededInterpolation:
+  Enabled: false
 Bundler/OrderedGems:
   Enabled: false
