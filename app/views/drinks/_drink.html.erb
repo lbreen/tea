@@ -1,6 +1,6 @@
 <div id="drink-status" class="text-center" style="margin-bottom: 16px;">
   <% if current_user == drink.user %>
-    <%= link_to "Brew is ready", group_drink_path(drink.group, drink.id), method: :put, remote: true, class: "btn btn-primary" %>
+    <%= link_to "Ready to serve", group_drink_path(drink.group, drink.id), method: :put, remote: true, class: "btn btn-primary" %>
   <% else %>
     <p>Boiling the kettle...</p>
   <% end %>

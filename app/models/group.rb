@@ -25,6 +25,14 @@ class Group < ApplicationRecord
     false
   end
 
+  def drink_in_progress?
+    drinks.where(status: 0).any?
+  end
+
+  def drink_in_progress
+    drinks.where(status: 0).first
+  end
+
   def default_colour
     self.colour = 'rgb(255, 255, 255)' if colour.nil?
   end

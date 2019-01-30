@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
     @group_statistics = group_statistics
     @message = Message.new
     @messages = @group.messages.reverse_order.page.reverse
+    @drink = @group.drink_in_progress if @group.drink_in_progress # This logic could be better, consider attr_reader
   end
 
   def new

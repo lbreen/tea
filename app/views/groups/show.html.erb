@@ -19,13 +19,19 @@
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="drink-container">
-        <%= simple_form_for [@group, Drink.new], remote: true do |f| %>
-          <%= f.error_notification %>
-          <%= f.input :limit, input_html: { value: 5 } %>
-          <%= f.submit 'Make tea', class: 'btn btn-primary' %>
+        <% if @drink %>
+          <div id="drink-view">
+            <%= render 'drinks/drink', drink: @drink %>
+          </div>
+        <% else %>
+          <%= simple_form_for [@group, Drink.new], remote: true do |f| %>
+            <%= f.error_notification %>
+            <%= f.input :limit, input_html: { value: 5 } %>
+            <%= f.submit 'Make tea', class: 'btn btn-primary' %>
+          <% end %>
+          <div id="drink-view">
+          </div>
         <% end %>
-        <div id="drink-view">
-        </div>
       </div>
     </div>
     <div class="col-xs-12 col-md-6">
