@@ -1,8 +1,10 @@
 <div id="drink-status" class="text-center" style="margin-bottom: 16px;">
   <% if user == drink.user %>
     <%= link_to "Ready to serve", group_drink_path(drink.group, drink.id), method: :put, remote: true, class: "btn btn-primary" %>
-  <% else %>
+  <% elsif drink.status == 'boiling' %>
     <p>Boiling the kettle...</p>
+  <% elsif drink.status == 'ready' %>
+    <p>Collect your brew!</p>
   <% end %>
 </div>
 <div id="drink-list">
@@ -19,8 +21,10 @@
   </div>
 </div>
 <div id="drink-action" class="text-center">
-  <% if user != drink.user %>
-    <%= link_to "Request a brew", group_path(drink.group), class: "btn btn-primary" %>
+  <% if user != drink.user && drink.status == 'boiling' %>
+    <%= link_to "Request a brew", group_path(drink.group), class: "btn btn-primary", id: "request-drink-btn" %>
+  <% elsif user != drink.user && drink.status == 'ready' %>
+    <%= link_to "Collect brew", group_path(drink.group), class: "btn btn-primary", id: "collect-drink-btn" %>
   <% end %>
 </div>
 

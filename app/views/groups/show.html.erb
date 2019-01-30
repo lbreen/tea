@@ -76,12 +76,18 @@
                 const messagesContainer = document.querySelector('#messages');
                 messagesContainer.insertAdjacentHTML('beforeend', data.partial);
                 scrollLastMessageIntoView();
-              } else {
+              } else if (data.type === 'create_drink') {
                 const newDrinkForm = document.getElementById('new_drink');
                 newDrinkForm.style.display = 'none';
 
                 const drinksContainer = document.getElementById("drink-view");
                 drinksContainer.insertAdjacentHTML('beforeend', data.partial);
+              } else {
+                const drinksContainer = document.getElementById("drink-view");
+                drinksContainer.innerHTML = data.partial;
+
+                const requestDrinkBtn = document.getElementById('request-drink-btn');
+                requestDrinkBtn.style.display = 'none';
               }
             }
           }

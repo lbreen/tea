@@ -7,12 +7,22 @@ class Drink < ApplicationRecord
 
   enum status: %i[boiling ready]
 
-  after_create :broadcast_drink
+  after_create :broadcast_create_drink
+  after_update :broadcast_update_drink
 
-  def broadcast_drink
+  def broadcast_create_drink
     ActionCable.server.broadcast(
       "group_#{group.id}",
-      type: 'drink',
+      type: 'create_drink',
+      partial: render_drink(self),
+      current_user_id: user.id
+    )
+  end
+
+  def broadcast_update_drink
+    ActionCable.server.broadcast(
+      "group_#{group.id}",
+      type: 'update_drink',
       partial: render_drink(self),
       current_user_id: user.id
     )
