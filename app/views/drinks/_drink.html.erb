@@ -1,0 +1,19 @@
+<div id="drink-status" class="text-center" style="margin-bottom: 16px;">
+  <% if current_user == drink.user %>
+    <%= link_to "Brew is ready", group_drink_path(drink.group, drink.id), method: :put, remote: true, class: "btn btn-primary" %>
+  <% else %>
+    <p>Boiling the kettle...</p>
+  <% end %>
+</div>
+<div class="drink-card">
+  <div class="drink-user-info">
+    <%= user_avatar_photo drink.user, {class: "avatar"} %>
+    <p><%= drink.user.full_name %></p>
+  </div>
+  <div class="drink-user-preferences">
+    <p><strong>Drink:</strong> Tea</p>
+    <p><strong>Sugar:</strong> 2</p>
+    <p><strong>Milk:</strong> Dollop</p>
+  </div>
+</div>
+

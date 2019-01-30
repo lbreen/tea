@@ -1,0 +1,8 @@
+<% if @drink.errors.any? %>
+
+<% else %>
+  var drinkForm = document.getElementById('new_drink');
+  drinkForm.style.display = 'none';
+  var drinkContainer = document.getElementById('drink-view');
+  drinkContainer.insertAdjacentHTML('beforeend', '<%= j render "drink", drink: @drink %>')
+<% end %>

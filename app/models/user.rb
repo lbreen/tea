@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :groups
   has_many :messages, dependent: :destroy
   has_many :friendships, dependent: :destroy
+  has_many :drinks, dependent: :destroy
 
   def full_name
     "#{first_name} #{last_name}"

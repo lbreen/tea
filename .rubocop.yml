@@ -9,7 +9,7 @@ AllCops:
     - 'support/**/*'
     - 'tmp/**/*'
     - 'test/**/*'
-
+    - "**/*.erb"
 ConditionalAssignment:
   Enabled: false
 StringLiterals:

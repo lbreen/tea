@@ -1,0 +1,24 @@
+.drink-container {
+  margin: 64px 0;
+}
+.drink-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.drink-user-info {
+  display: flex;
+  align-items: center;
+  p {
+    margin-left: 5px;
+  }
+}
+.drink-user-preferences {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  p {
+  margin-left: 5px;
+  }
+}

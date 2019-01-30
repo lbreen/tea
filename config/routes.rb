@@ -14,10 +14,12 @@ Rails.application.routes.draw do
   resources :groups do
     resources :group_members, only: [:new, :create, :destroy]
 
-    resources :messages, only: [ :create, :index ]
+    resources :messages, only: [:create, :index]
+
+    resources :drinks, only: [:create, :update]
   end
 
-  resources :friendships, only: [ :index, :update ]
+  resources :friendships, only: [:index, :update]
 
   resources :users, only: [] do
     resources :friendships, only: [:create]

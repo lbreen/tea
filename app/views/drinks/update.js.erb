@@ -1,0 +1,6 @@
+<% if @drink.errors.any? %>
+
+<% else %>
+  var drinkStatus = document.getElementById('drink-status');
+  drinkStatus.innerText = 'Collect your brew!';
+<% end %>
