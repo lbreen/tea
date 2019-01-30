@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  drink: 
+  user: one
+  drink_type: MyString
+
+two:
+  drink: 
+  user: two
+  drink_type: MyString

@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:create, :index]
 
-    resources :drinks, only: [:create, :update]
+    resources :drinks, only: [:create, :update] do
+      resources :drink_responses, only: [:create]
+    end
   end
 
   resources :friendships, only: [:index, :update]

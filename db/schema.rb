@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_124656) do
+ActiveRecord::Schema.define(version: 2019_01_30_152230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "drink_responses", force: :cascade do |t|
+    t.bigint "drink_id"
+    t.bigint "user_id"
+    t.string "drink_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drink_id"], name: "index_drink_responses_on_drink_id"
+    t.index ["user_id"], name: "index_drink_responses_on_user_id"
+  end
 
   create_table "drinks", force: :cascade do |t|
     t.integer "status", default: 0
@@ -81,6 +91,8 @@ ActiveRecord::Schema.define(version: 2019_01_29_124656) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "drink_responses", "drinks"
+  add_foreign_key "drink_responses", "users"
   add_foreign_key "drinks", "groups"
   add_foreign_key "drinks", "users"
   add_foreign_key "group_members", "groups"

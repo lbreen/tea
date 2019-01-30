@@ -1,0 +1,8 @@
+<%= simple_form_for [group, drink, DrinkResponse.new], remote: true do |f| %>
+  <%= f.error_notification %>
+
+  <ul class="list-inline">
+    <li><%= f.input :drink_type, as: :radio_buttons, collection: %w[Tea Coffee] %></li>
+    <li><%= f.submit "Send request", class: "btn btn-primary" %></li>
+  </ul>
+<% end %>

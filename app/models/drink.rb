@@ -2,6 +2,8 @@ class Drink < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
+  has_many :drink_responses
+
   validates :limit, presence: true
   validates :limit, numericality: { only_integer: true, greater_than: 0 }
 

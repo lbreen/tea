@@ -22,7 +22,7 @@
 </div>
 <div id="drink-action" class="text-center">
   <% if user != drink.user && drink.status == 'boiling' %>
-    <%= link_to "Request a brew", group_path(drink.group), class: "btn btn-primary", id: "request-drink-btn" %>
+    <%= render 'drink_responses/new_drink_responses_form', group: drink.group, drink: drink %>
   <% elsif user != drink.user && drink.status == 'ready' %>
     <%= link_to "Collect brew", group_path(drink.group), class: "btn btn-primary", id: "collect-drink-btn" %>
   <% end %>
