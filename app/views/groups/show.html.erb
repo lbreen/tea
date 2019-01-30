@@ -21,7 +21,7 @@
       <div class="drink-container">
         <% if @drink %>
           <div id="drink-view">
-            <%= render 'drinks/drink', drink: @drink %>
+            <%= render 'drinks/drink', drink: @drink, user: current_user %>
           </div>
         <% else %>
           <%= simple_form_for [@group, Drink.new], remote: true do |f| %>
@@ -71,16 +71,19 @@
       App['group_<%= @group.id %>'] = App.cable.subscriptions.create(
         { channel: 'GroupsChannel', group_id: <%= @group.id %> },
         { received: (data) => {
-            if (data.type === 'message'){
-              if (data.current_user_id !== <%= current_user.id %>) {
+            if (data.current_user_id !== <%= current_user.id %>) {
+              if (data.type === 'message') {
                 const messagesContainer = document.querySelector('#messages');
-                messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
+                messagesContainer.insertAdjacentHTML('beforeend', data.partial);
                 scrollLastMessageIntoView();
-              }
-            } else {
-              // Do this
-            }
+              } else {
+                const newDrinkForm = document.getElementById('new_drink');
+                newDrinkForm.style.display = 'none';
 
+                const drinksContainer = document.getElementById("drink-view");
+                drinksContainer.insertAdjacentHTML('beforeend', data.partial);
+              }
+            }
           }
         }
       )

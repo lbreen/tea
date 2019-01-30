@@ -4,5 +4,5 @@
   var drinkForm = document.getElementById('new_drink');
   drinkForm.style.display = 'none';
   var drinkContainer = document.getElementById('drink-view');
-  drinkContainer.insertAdjacentHTML('beforeend', '<%= j render "drink", drink: @drink %>')
+  drinkContainer.insertAdjacentHTML('beforeend', '<%= j render "drink", drink: @drink, user: @drink.user %>');
 <% end %>

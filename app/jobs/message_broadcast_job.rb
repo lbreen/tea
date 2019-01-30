@@ -5,7 +5,7 @@ class MessageBroadcastJob < ApplicationJob
     ActionCable.server.broadcast(
       "group_#{message.group.id}",
       type: 'message',
-      message_partial: render_message(message),
+      partial: render_message(message),
       current_user_id: message.user.id
     )
   end
