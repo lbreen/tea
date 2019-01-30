@@ -16,4 +16,9 @@
     <p><strong>Milk:</strong> Dollop</p>
   </div>
 </div>
+<div class="drink-request text-center">
+  <% if current_user != drink.user %>
+    <%= link_to "Request a brew", group_path(@group), class: "btn btn-primary" %>
+  <% end %>
+</div>
 
