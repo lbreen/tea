@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.3'
+ruby '2.6.5'
 
 gem 'devise'
 gem 'figaro'
@@ -15,7 +15,7 @@ gem 'font-awesome-sass'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '>= 4.0.x'
 
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'

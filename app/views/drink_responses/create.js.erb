@@ -1,5 +1,9 @@
 <% if @drink_response.errors.any? %>
 
 <% else %>
-  console.log('woo hoo');
+  var drinkResponseForm = document.getElementById('new_drink_response');
+  drinkResponseForm.style.display = 'none';
+
+  var drinkList = document.getElementById('drink-list');
+  drinkList.insertAdjacentHTML('beforeend', '<%= j render "drinks/drink_card", drink_response: @drink_response %>');
 <% end %>

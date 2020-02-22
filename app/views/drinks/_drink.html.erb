@@ -8,23 +8,17 @@
   <% end %>
 </div>
 <div id="drink-list">
-  <div class="drink-card">
-    <div class="drink-user-info">
-      <%= user_avatar_photo drink.user, {class: "avatar"} %>
-      <p><%= drink.user.full_name %></p>
-    </div>
-    <div class="drink-user-preferences">
-      <p><strong>Drink:</strong> Tea</p>
-      <p><strong>Sugar:</strong> 2</p>
-      <p><strong>Milk:</strong> Dollop</p>
-    </div>
-  </div>
+  <% if drink.drink_responses.any? %>
+    <% drink.drink_responses.each do |drink_response| %>
+      <%= render 'drinks/drink_card', drink_response: drink_response %>
+    <% end %>
+  <% end %>
 </div>
 <div id="drink-action" class="text-center">
-  <% if user != drink.user && drink.status == 'boiling' %>
+  <% if user != drink.user && drink.status == 'boiling' && drink.drink_responses.map { |dr| dr.user_id }.exclude?(user.id) %>
     <%= render 'drink_responses/new_drink_responses_form', group: drink.group, drink: drink %>
   <% elsif user != drink.user && drink.status == 'ready' %>
-    <%= link_to "Collect brew", group_path(drink.group), class: "btn btn-primary", id: "collect-drink-btn" %>
+    <%= link_to "Collect your beverage", group_path(drink.group), class: "btn btn-primary", id: "collect-drink-btn" %>
   <% end %>
 </div>
 

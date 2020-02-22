@@ -83,6 +83,7 @@
                 const drinksContainer = document.getElementById("drink-view");
                 drinksContainer.insertAdjacentHTML('beforeend', data.partial);
               } else {
+                console.log('update');
                 const drinksContainer = document.getElementById("drink-view");
                 drinksContainer.innerHTML = data.partial;
 

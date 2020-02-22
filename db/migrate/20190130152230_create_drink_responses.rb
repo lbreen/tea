@@ -4,6 +4,7 @@ class CreateDrinkResponses < ActiveRecord::Migration[5.2]
       t.references :drink, foreign_key: true
       t.references :user, foreign_key: true
       t.string :drink_type
+      t.boolean :collected, default: false
 
       t.timestamps
     end

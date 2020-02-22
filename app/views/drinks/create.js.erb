@@ -1,8 +1,9 @@
 <% if @drink.errors.any? %>
 
 <% else %>
+  // Code to update view for drink creator
   var drinkForm = document.getElementById('new_drink');
   drinkForm.style.display = 'none';
   var drinkContainer = document.getElementById('drink-view');
-  drinkContainer.insertAdjacentHTML('beforeend', '<%= j render "drink", drink: @drink, user: @drink.user %>');
+  drinkContainer.insertAdjacentHTML('beforeend', '<%= j render "drink", drink: @drink, user: @drink.user, drink_responses: @drink_responses %>');
 <% end %>

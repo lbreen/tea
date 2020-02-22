@@ -2,7 +2,7 @@ class Drink < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
-  has_many :drink_responses
+  has_many :drink_responses, dependent: :destroy
 
   validates :limit, presence: true
   validates :limit, numericality: { only_integer: true, greater_than: 0 }
@@ -10,7 +10,7 @@ class Drink < ApplicationRecord
   enum status: %i[boiling ready]
 
   after_create :broadcast_create_drink
-  after_update :broadcast_update_drink
+  # after_update :broadcast_update_drink
 
   def broadcast_create_drink
     ActionCable.server.broadcast(

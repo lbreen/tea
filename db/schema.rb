@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_152230) do
     t.bigint "drink_id"
     t.bigint "user_id"
     t.string "drink_type"
+    t.boolean "collected", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["drink_id"], name: "index_drink_responses_on_drink_id"

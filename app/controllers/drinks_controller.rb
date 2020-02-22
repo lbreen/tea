@@ -7,6 +7,9 @@ class DrinksController < ApplicationController
     @drink.group = @group
     @drink.status = 0
 
+    @drink_responses = []
+    @drink_responses << create_current_user_drink_response
+
     authorize @drink
 
     if @drink.save
@@ -41,6 +44,14 @@ class DrinksController < ApplicationController
   end
 
   private
+
+  def create_current_user_drink_response
+    DrinkResponse.create(
+      user: current_user,
+      drink: @drink,
+      drink_type: "Tea"
+    )
+  end
 
   def drink_params
     params.require(:drink).permit(:status, :limit)
