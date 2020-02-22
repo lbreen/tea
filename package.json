@@ -2,17 +2,17 @@
   "name": "tea",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.0",
-    "bootstrap": ">=3.4.0",
-    "coffeescript": "1.12.7",
-    "jquery": "^3.2.1",
-    "typed.js": "^2.0.6",
+    "@rails/webpacker": "^4.2.2",
+    "bootstrap": ">=4.4.1",
+    "coffeescript": "2.5.1",
+    "jquery": "^3.4.1",
+    "typed.js": "^2.0.11",
     "typedjs": "^0.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^8.0.6",
     "babel-preset-es2015": "^6.24.1",
-    "webpack-dev-server": ">=3.1.11"
+    "webpack-dev-server": ">=3.10.3"
   }
 }
